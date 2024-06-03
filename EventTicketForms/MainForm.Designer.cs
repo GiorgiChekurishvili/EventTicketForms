@@ -33,9 +33,10 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             panel2 = new Panel();
+            btnLogOut = new Button();
             btnBought = new Button();
             button3 = new Button();
-            button2 = new Button();
+            btnFavorites = new Button();
             pnlSubEvents = new Panel();
             btnOthers = new Button();
             btnKids = new Button();
@@ -105,9 +106,10 @@
             // 
             panel2.AutoScroll = true;
             panel2.BackColor = Color.FromArgb(17, 53, 71);
+            panel2.Controls.Add(btnLogOut);
             panel2.Controls.Add(btnBought);
             panel2.Controls.Add(button3);
-            panel2.Controls.Add(button2);
+            panel2.Controls.Add(btnFavorites);
             panel2.Controls.Add(pnlSubEvents);
             panel2.Controls.Add(btnEvents);
             panel2.Controls.Add(panel3);
@@ -116,6 +118,21 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(302, 715);
             panel2.TabIndex = 1;
+            // 
+            // btnLogOut
+            // 
+            btnLogOut.FlatStyle = FlatStyle.Flat;
+            btnLogOut.ForeColor = Color.Gainsboro;
+            btnLogOut.Location = new Point(0, 667);
+            btnLogOut.Name = "btnLogOut";
+            btnLogOut.Padding = new Padding(10, 0, 0, 0);
+            btnLogOut.Size = new Size(302, 45);
+            btnLogOut.TabIndex = 9;
+            btnLogOut.Text = "Log Out";
+            btnLogOut.TextAlign = ContentAlignment.MiddleLeft;
+            btnLogOut.UseVisualStyleBackColor = true;
+            btnLogOut.Visible = false;
+            btnLogOut.Click += btnLogOut_Click;
             // 
             // btnBought
             // 
@@ -134,10 +151,9 @@
             // 
             // button3
             // 
-            button3.Dock = DockStyle.Bottom;
             button3.FlatStyle = FlatStyle.Flat;
             button3.ForeColor = Color.Gainsboro;
-            button3.Location = new Point(0, 670);
+            button3.Location = new Point(0, 667);
             button3.Name = "button3";
             button3.Padding = new Padding(10, 0, 0, 0);
             button3.Size = new Size(302, 45);
@@ -147,20 +163,21 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
-            // button2
+            // btnFavorites
             // 
-            button2.Dock = DockStyle.Top;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.ForeColor = Color.Gainsboro;
-            button2.Location = new Point(0, 509);
-            button2.Name = "button2";
-            button2.Padding = new Padding(10, 0, 0, 0);
-            button2.Size = new Size(302, 45);
-            button2.TabIndex = 6;
-            button2.Text = "My Favorites";
-            button2.TextAlign = ContentAlignment.MiddleLeft;
-            button2.UseVisualStyleBackColor = true;
-            button2.Visible = false;
+            btnFavorites.Dock = DockStyle.Top;
+            btnFavorites.FlatStyle = FlatStyle.Flat;
+            btnFavorites.ForeColor = Color.Gainsboro;
+            btnFavorites.Location = new Point(0, 509);
+            btnFavorites.Name = "btnFavorites";
+            btnFavorites.Padding = new Padding(10, 0, 0, 0);
+            btnFavorites.Size = new Size(302, 45);
+            btnFavorites.TabIndex = 6;
+            btnFavorites.Text = "My Favorites";
+            btnFavorites.TextAlign = ContentAlignment.MiddleLeft;
+            btnFavorites.UseVisualStyleBackColor = true;
+            btnFavorites.Visible = false;
+            btnFavorites.Click += button2_Click;
             // 
             // pnlSubEvents
             // 
@@ -483,7 +500,7 @@
         private Button btnTheatre;
         private Button btnOthers;
         private Button button3;
-        private Button button2;
+        private Button btnFavorites;
         private Panel pnlMain;
         private Panel pnlChild;
         private Panel panel5;
@@ -491,5 +508,6 @@
         private TextBox txtFilter;
         private DataGridView dataGridForEvents;
         private Button btnBought;
+        private Button btnLogOut;
     }
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
 using EventTicketForms.Entities;
+using EventTicketForms.Resources;
 
 namespace EventTicketForms.Services
 {
-    internal class AuthenticationHelper
+    internal class AuthenticationHelper : IAuthenticationHelper
     {
         private readonly string loginUrl = "http://localhost:5172/api/Authentication/login";
         private readonly string registerUrl = "http://localhost:5172/api/Authentication/register";
@@ -39,7 +40,9 @@ namespace EventTicketForms.Services
                         }
                         else
                         {
+                            
                             return data;
+                            
                         }
                     }
                 }

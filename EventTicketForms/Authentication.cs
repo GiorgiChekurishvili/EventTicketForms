@@ -1,13 +1,17 @@
 using EventTicketForms.Entities;
+using EventTicketForms.Resources;
 using EventTicketForms.Services;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EventTicketForms
 {
     public partial class Authentication : Form
     {
-        public Authentication()
+        private MainForm _mainform;
+        public Authentication(MainForm mainForm)
         {
             InitializeComponent();
+            _mainform = mainForm;
         }
 
 
@@ -159,6 +163,14 @@ namespace EventTicketForms
             if (response == null)
             {
                 MessageBox.Show("Invalid Email Address or Password or Account isnt verified");
+
+            }
+            else
+            {
+                TokenManager.Token = response;
+                this.Hide();
+                _mainform.CheckIfUserLogin();
+                
 
             }
 

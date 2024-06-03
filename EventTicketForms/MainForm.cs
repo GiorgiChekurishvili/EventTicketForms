@@ -18,14 +18,28 @@ namespace EventTicketForms
     public partial class MainForm : Form
     {
         List<EventsDto> _events = new List<EventsDto>();
+        private string _token;
         public MainForm()
         {
             InitializeComponent();
             FillDataGridAutomatically();
+            _token = TokenManager.Token;
+            CheckIfUserLogin();
+        }
+        public void CheckIfUserLogin()
+        {
+            if (TokenManager.Token != null)
+            {
+                button3.Visible = false;
+                btnLogOut.Visible = true;
+                btnFavorites.Visible = true;
+                btnBought.Visible = true;
+            }
+            
         }
         private void PopulateEventsList()
         {
-            _events.Clear(); 
+            _events.Clear();
             for (int i = 0; i < dataGridForEvents.Rows.Count; i++)
             {
                 DataGridViewRow row = dataGridForEvents.Rows[i];
@@ -50,7 +64,7 @@ namespace EventTicketForms
         }
         public async void FillDataGridAutomatically()
         {
-            
+
             EventsShow events = new EventsShow();
             var json = await events.GetAllEvents();
             List<EventsDto>? allEvents = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -82,7 +96,7 @@ namespace EventTicketForms
                 pnlChild.Tag = childform;
                 childform.BringToFront();
                 childform.Show();
-                
+
             }
             catch { }
         }
@@ -315,9 +329,10 @@ namespace EventTicketForms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Authentication authentication = new Authentication();
+            Authentication authentication = new Authentication(this);
             authentication.Show();
             authentication.FormClosed += (s, args) => this.Close();
+            
         }
 
         private void dataGridForEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -328,20 +343,32 @@ namespace EventTicketForms
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
             string filterText = txtFilter.Text.ToLower();
-           
-                if (string.IsNullOrEmpty(filterText))
-                {
-                    dataGridForEvents.DataSource = _events;
-                }
-                if (dataGridForEvents.DataSource is List<EventsDto> events)
-                {
-                    var filteredEvents = events.Where(e => e.EventName.ToLower().Contains(filterText)).ToList();
-                    dataGridForEvents.DataSource = filteredEvents;
-                }
-                
-            
+
+            if (string.IsNullOrEmpty(filterText))
+            {
+                dataGridForEvents.DataSource = _events;
+            }
+            if (dataGridForEvents.DataSource is List<EventsDto> events)
+            {
+                var filteredEvents = events.Where(e => e.EventName.ToLower().Contains(filterText)).ToList();
+                dataGridForEvents.DataSource = filteredEvents;
+            }
+
+
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            TokenManager.Token = null;
+            btnLogOut.Visible = false;
+            button3.Visible = true;
+
+        }
     }
 }
