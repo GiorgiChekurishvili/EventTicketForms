@@ -17,13 +17,40 @@ namespace EventTicketForms
 {
     public partial class MainForm : Form
     {
+        List<EventsDto> _events = new List<EventsDto>();
         public MainForm()
         {
             InitializeComponent();
             FillDataGridAutomatically();
         }
+        private void PopulateEventsList()
+        {
+            _events.Clear(); 
+            for (int i = 0; i < dataGridForEvents.Rows.Count; i++)
+            {
+                DataGridViewRow row = dataGridForEvents.Rows[i];
+                if (!row.IsNewRow)
+                {
+                    string eventName = row.Cells["EventName"].Value.ToString();
+                    string eventDescription = row.Cells["EventDescription"].Value.ToString();
+                    string eventLocation = row.Cells["EventLocation"].Value.ToString();
+                    int eventCapacity = int.Parse(row.Cells["Capacity"].Value.ToString());
+                    DateTime eventDate = Convert.ToDateTime(row.Cells["EventDate"].Value);
+
+                    _events.Add(new EventsDto
+                    {
+                        EventName = eventName,
+                        EventDescription = eventDescription,
+                        EventLocation = eventLocation,
+                        Capacity = eventCapacity,
+                        EventDate = eventDate
+                    });
+                }
+            }
+        }
         public async void FillDataGridAutomatically()
         {
+            
             EventsShow events = new EventsShow();
             var json = await events.GetAllEvents();
             List<EventsDto>? allEvents = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -33,6 +60,7 @@ namespace EventTicketForms
                 dataGridForEvents.DataSource = allEvents;
                 dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                 dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                PopulateEventsList();
             }
         }
         private Form activeform = null;
@@ -54,6 +82,7 @@ namespace EventTicketForms
                 pnlChild.Tag = childform;
                 childform.BringToFront();
                 childform.Show();
+                
             }
             catch { }
         }
@@ -81,6 +110,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = allEvents;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
                 if (pnlSubEvents.Visible == true)
                 {
@@ -108,6 +138,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = data;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
             }
             catch { }
@@ -129,6 +160,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = data;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
             }
             catch { }
@@ -149,6 +181,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = data;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
             }
             catch { }
@@ -169,6 +202,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = data;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
             }
             catch { }
@@ -189,6 +223,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = data;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
             }
             catch { }
@@ -209,6 +244,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = data;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
             }
             catch { }
@@ -229,6 +265,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = data;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
             }
             catch { }
@@ -249,6 +286,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = data;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
             }
             catch { }
@@ -269,6 +307,7 @@ namespace EventTicketForms
                     dataGridForEvents.DataSource = data;
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    PopulateEventsList();
                 }
             }
             catch { }
@@ -285,5 +324,24 @@ namespace EventTicketForms
         {
 
         }
+
+        private void txtFilter_TextChanged(object sender, EventArgs e)
+        {
+            string filterText = txtFilter.Text.ToLower();
+           
+                if (string.IsNullOrEmpty(filterText))
+                {
+                    dataGridForEvents.DataSource = _events;
+                }
+                if (dataGridForEvents.DataSource is List<EventsDto> events)
+                {
+                    var filteredEvents = events.Where(e => e.EventName.ToLower().Contains(filterText)).ToList();
+                    dataGridForEvents.DataSource = filteredEvents;
+                }
+                
+            
+
+        }
+
     }
 }

@@ -11,7 +11,7 @@ namespace EventTicketForms.Resources
         public string EventName { get; set; }
         public string EventDescription { get; set; }
         public string EventLocation { get; set; }
-        public string Capacity { get; set; }
-        public string EventDate { get; set; }
+        public int Capacity { get; set; }
+        public DateTime EventDate { get; set; }
     }
 }

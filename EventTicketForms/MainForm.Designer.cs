@@ -33,6 +33,7 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             panel2 = new Panel();
+            btnBought = new Button();
             button3 = new Button();
             button2 = new Button();
             pnlSubEvents = new Panel();
@@ -51,10 +52,8 @@
             pnlChild = new Panel();
             panel5 = new Panel();
             panel6 = new Panel();
-            txtLoginEmail = new TextBox();
-            label1 = new Label();
+            txtFilter = new TextBox();
             dataGridForEvents = new DataGridView();
-            btnBought = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -117,6 +116,21 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(302, 715);
             panel2.TabIndex = 1;
+            // 
+            // btnBought
+            // 
+            btnBought.Dock = DockStyle.Top;
+            btnBought.FlatStyle = FlatStyle.Flat;
+            btnBought.ForeColor = Color.Gainsboro;
+            btnBought.Location = new Point(0, 554);
+            btnBought.Name = "btnBought";
+            btnBought.Padding = new Padding(10, 0, 0, 0);
+            btnBought.Size = new Size(302, 45);
+            btnBought.TabIndex = 8;
+            btnBought.Text = "Bought Tickets";
+            btnBought.TextAlign = ContentAlignment.MiddleLeft;
+            btnBought.UseVisualStyleBackColor = true;
+            btnBought.Visible = false;
             // 
             // button3
             // 
@@ -375,7 +389,6 @@
             // pnlChild
             // 
             pnlChild.Controls.Add(panel5);
-            pnlChild.Controls.Add(label1);
             pnlChild.Controls.Add(dataGridForEvents);
             pnlChild.Dock = DockStyle.Fill;
             pnlChild.ForeColor = Color.White;
@@ -387,7 +400,7 @@
             // panel5
             // 
             panel5.Controls.Add(panel6);
-            panel5.Controls.Add(txtLoginEmail);
+            panel5.Controls.Add(txtFilter);
             panel5.Location = new Point(351, 30);
             panel5.Name = "panel5";
             panel5.Size = new Size(499, 51);
@@ -402,27 +415,19 @@
             panel6.Size = new Size(477, 1);
             panel6.TabIndex = 4;
             // 
-            // txtLoginEmail
+            // txtFilter
             // 
-            txtLoginEmail.Anchor = AnchorStyles.None;
-            txtLoginEmail.BackColor = Color.FromArgb(30, 30, 30);
-            txtLoginEmail.BorderStyle = BorderStyle.None;
-            txtLoginEmail.Font = new Font("Segoe UI", 13F);
-            txtLoginEmail.ForeColor = Color.Gray;
-            txtLoginEmail.Location = new Point(3, 5);
-            txtLoginEmail.Name = "txtLoginEmail";
-            txtLoginEmail.Size = new Size(477, 29);
-            txtLoginEmail.TabIndex = 2;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 13F);
-            label1.Location = new Point(251, 37);
-            label1.Name = "label1";
-            label1.Size = new Size(61, 30);
-            label1.TabIndex = 2;
-            label1.Text = "Filter";
+            txtFilter.Anchor = AnchorStyles.None;
+            txtFilter.BackColor = Color.FromArgb(30, 30, 30);
+            txtFilter.BorderStyle = BorderStyle.None;
+            txtFilter.Font = new Font("Segoe UI", 13F);
+            txtFilter.ForeColor = Color.Gray;
+            txtFilter.Location = new Point(3, 5);
+            txtFilter.Name = "txtFilter";
+            txtFilter.PlaceholderText = "Search An  Event";
+            txtFilter.Size = new Size(477, 29);
+            txtFilter.TabIndex = 2;
+            txtFilter.TextChanged += txtFilter_TextChanged;
             // 
             // dataGridForEvents
             // 
@@ -434,21 +439,6 @@
             dataGridForEvents.Size = new Size(1134, 613);
             dataGridForEvents.TabIndex = 0;
             dataGridForEvents.CellContentClick += dataGridForEvents_CellContentClick;
-            // 
-            // btnBought
-            // 
-            btnBought.Dock = DockStyle.Top;
-            btnBought.FlatStyle = FlatStyle.Flat;
-            btnBought.ForeColor = Color.Gainsboro;
-            btnBought.Location = new Point(0, 554);
-            btnBought.Name = "btnBought";
-            btnBought.Padding = new Padding(10, 0, 0, 0);
-            btnBought.Size = new Size(302, 45);
-            btnBought.TabIndex = 8;
-            btnBought.Text = "Bought Tickets";
-            btnBought.TextAlign = ContentAlignment.MiddleLeft;
-            btnBought.UseVisualStyleBackColor = true;
-            btnBought.Visible = false;
             // 
             // MainForm
             // 
@@ -468,7 +458,6 @@
             pnlSubEvents.ResumeLayout(false);
             pnlMain.ResumeLayout(false);
             pnlChild.ResumeLayout(false);
-            pnlChild.PerformLayout();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridForEvents).EndInit();
@@ -499,8 +488,7 @@
         private Panel pnlChild;
         private Panel panel5;
         private Panel panel6;
-        private TextBox txtLoginEmail;
-        private Label label1;
+        private TextBox txtFilter;
         private DataGridView dataGridForEvents;
         private Button btnBought;
     }
