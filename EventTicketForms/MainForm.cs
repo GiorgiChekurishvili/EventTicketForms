@@ -7,6 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using EventTicketForms.Services;
+using EventTicketForms.Resources;
+using Newtonsoft.Json;
+using System.Linq.Expressions;
 
 namespace EventTicketForms
 {
@@ -15,22 +20,42 @@ namespace EventTicketForms
         public MainForm()
         {
             InitializeComponent();
+            FillDataGridAutomatically();
+        }
+        public async void FillDataGridAutomatically()
+        {
+            EventsShow events = new EventsShow();
+            var json = await events.GetAllEvents();
+            List<EventsDto>? allEvents = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+            dataGridForEvents.DataSource = null;
+            if (allEvents != null)
+            {
+                dataGridForEvents.DataSource = allEvents;
+                dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
         }
         private Form activeform = null;
         public void openChildForm(Form childform)
         {
-            if (activeform != null)
+            try
             {
-                activeform.Close();
+
+
+                if (activeform != null)
+                {
+                    activeform.Close();
+                }
+                activeform = childform;
+                childform.TopLevel = false;
+                childform.FormBorderStyle = FormBorderStyle.None;
+                childform.Dock = DockStyle.Fill;
+                pnlChild.Controls.Add(childform);
+                pnlChild.Tag = childform;
+                childform.BringToFront();
+                childform.Show();
             }
-            activeform = childform;
-            childform.TopLevel = false;
-            childform.FormBorderStyle = FormBorderStyle.None;
-            childform.Dock = DockStyle.Fill;
-            pnlChild.Controls.Add(childform);
-            pnlChild.Tag = childform;
-            childform.BringToFront();
-            childform.Show();
+            catch { }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,61 +68,210 @@ namespace EventTicketForms
 
         }
 
-        private void btnEvents_Click(object sender, EventArgs e)
+        private async void btnEvents_Click(object sender, EventArgs e)
         {
-            if (pnlSubEvents.Visible == true)
+            try
             {
-                pnlSubEvents.Visible = false;
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEvents();
+                List<EventsDto>? allEvents = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (allEvents != null)
+                {
+                    dataGridForEvents.DataSource = allEvents;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+                if (pnlSubEvents.Visible == true)
+                {
+                    pnlSubEvents.Visible = false;
+                }
+                else
+                {
+                    pnlSubEvents.Visible = true;
+                }
             }
-            else
+            catch { }
+        }
+
+        private async void btnSports_Click(object sender, EventArgs e)
+        {
+            try
             {
-                pnlSubEvents.Visible = true;
+
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEventsByCategories(1);
+                List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (data != null)
+                {
+                    dataGridForEvents.DataSource = data;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
             }
-        }
-
-        private void btnSports_Click(object sender, EventArgs e)
-        {
+            catch { }
 
         }
 
-        private void btnComedy_Click(object sender, EventArgs e)
+        private async void btnComedy_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEventsByCategories(2);
+                List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (data != null)
+                {
+                    dataGridForEvents.DataSource = data;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch { }
         }
 
-        private void btnTheatre_Click(object sender, EventArgs e)
+        private async void btnTheatre_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEventsByCategories(3);
+                List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (data != null)
+                {
+                    dataGridForEvents.DataSource = data;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch { }
         }
 
-        private void btnOpera_Click(object sender, EventArgs e)
+        private async void btnOpera_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEventsByCategories(4);
+                List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (data != null)
+                {
+                    dataGridForEvents.DataSource = data;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch { }
         }
 
-        private void btnCircus_Click(object sender, EventArgs e)
+        private async void btnCircus_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEventsByCategories(5);
+                List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (data != null)
+                {
+                    dataGridForEvents.DataSource = data;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch { }
         }
 
-        private void btnConcerts_Click(object sender, EventArgs e)
+        private async void btnConcerts_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEventsByCategories(6);
+                List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (data != null)
+                {
+                    dataGridForEvents.DataSource = data;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch { }
         }
 
-        private void btnMovies_Click(object sender, EventArgs e)
+        private async void btnMovies_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEventsByCategories(7);
+                List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (data != null)
+                {
+                    dataGridForEvents.DataSource = data;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch { }
         }
 
-        private void btnKids_Click(object sender, EventArgs e)
+        private async void btnKids_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEventsByCategories(8);
+                List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (data != null)
+                {
+                    dataGridForEvents.DataSource = data;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch { }
         }
 
-        private void btnOthers_Click(object sender, EventArgs e)
+        private async void btnOthers_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+
+                EventsShow events = new EventsShow();
+                var json = await events.GetAllEventsByCategories(9);
+                List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
+                dataGridForEvents.DataSource = null;
+                if (data != null)
+                {
+                    dataGridForEvents.DataSource = data;
+                    dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
+                    dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch { }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -105,6 +279,11 @@ namespace EventTicketForms
             Authentication authentication = new Authentication();
             authentication.Show();
             authentication.FormClosed += (s, args) => this.Close();
+        }
+
+        private void dataGridForEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

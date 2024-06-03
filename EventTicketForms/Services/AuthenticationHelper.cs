@@ -7,7 +7,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using EventTicketForms.Entities;
 
-namespace EventTicketForms
+namespace EventTicketForms.Services
 {
     internal class AuthenticationHelper
     {
@@ -18,12 +18,12 @@ namespace EventTicketForms
         private readonly string changePasswordUrl = "http://localhost:5172/api/Authentication/changepassword";
         public async Task<string> Login(string email, string password)
         {
-            var inputdata = new 
+            var inputdata = new
             {
-                email = email,
-                password = password
+                email,
+                password
             };
-            
+
             var json = JsonConvert.SerializeObject(inputdata);
             var input = new StringContent(json, Encoding.UTF8, "application/json");
             using (HttpClient client = new HttpClient())
@@ -39,24 +39,24 @@ namespace EventTicketForms
                         }
                         else
                         {
-                           return data;
+                            return data;
                         }
                     }
                 }
             }
         }
-         
-        public  async Task Register(RegisterEntity register)
+
+        public async Task Register(RegisterEntity register)
         {
             var json = JsonConvert.SerializeObject(register);
-            var input = new StringContent (json, Encoding.UTF8, "application/json");
+            var input = new StringContent(json, Encoding.UTF8, "application/json");
             using (HttpClient client = new HttpClient())
             {
-                using (HttpResponseMessage response = await client.PostAsync(registerUrl,input))
+                using (HttpResponseMessage response = await client.PostAsync(registerUrl, input))
                 {
-                    using(HttpContent content = response.Content)
+                    using (HttpContent content = response.Content)
                     {
-                        switch(Convert.ToInt32(response.StatusCode))
+                        switch (Convert.ToInt32(response.StatusCode))
                         {
                             case 409: MessageBox.Show("User With This Email Address Already Exists"); break;
                             case 400: MessageBox.Show("Invalid Email Address or The Passwords Don't Match"); break;
@@ -93,7 +93,7 @@ namespace EventTicketForms
                 }
             }
             {
-                
+
             }
         }
         public async Task<int> ForgetPassword(string email)
@@ -108,7 +108,7 @@ namespace EventTicketForms
                     {
                         if (Convert.ToInt32(response.StatusCode) == 400)
                         {
-                             MessageBox.Show("Email Address Isnt Registered");
+                            MessageBox.Show("Email Address Isnt Registered");
                             return 400;
                         }
                         else if (Convert.ToInt32(response.StatusCode) == 200)
@@ -125,10 +125,10 @@ namespace EventTicketForms
                 }
             }
             {
-                
+
             }
         }
-        
+
         public async Task ChangePassword(ChangePasswordProperties inputdata)
         {
             var json = JsonConvert.SerializeObject(inputdata);
@@ -145,7 +145,7 @@ namespace EventTicketForms
                     {
                         MessageBox.Show("Invalid Token");
                     }
-                    else if(Convert.ToInt32(response.StatusCode) == 200)
+                    else if (Convert.ToInt32(response.StatusCode) == 200)
                     {
                         MessageBox.Show("Password Changed Successfully");
                     }

@@ -47,21 +47,22 @@
             btnSports = new Button();
             btnEvents = new Button();
             panel3 = new Panel();
+            pnlMain = new Panel();
             pnlChild = new Panel();
             panel5 = new Panel();
             panel6 = new Panel();
             txtLoginEmail = new TextBox();
             label1 = new Label();
-            dataGridView1 = new DataGridView();
-            pnlMain = new Panel();
+            dataGridForEvents = new DataGridView();
+            btnBought = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             pnlSubEvents.SuspendLayout();
+            pnlMain.SuspendLayout();
             pnlChild.SuspendLayout();
             panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            pnlMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridForEvents).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -105,6 +106,7 @@
             // 
             panel2.AutoScroll = true;
             panel2.BackColor = Color.FromArgb(17, 53, 71);
+            panel2.Controls.Add(btnBought);
             panel2.Controls.Add(button3);
             panel2.Controls.Add(button2);
             panel2.Controls.Add(pnlSubEvents);
@@ -144,6 +146,7 @@
             button2.Text = "My Favorites";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
+            button2.Visible = false;
             // 
             // pnlSubEvents
             // 
@@ -360,11 +363,20 @@
             panel3.Size = new Size(302, 96);
             panel3.TabIndex = 1;
             // 
+            // pnlMain
+            // 
+            pnlMain.Controls.Add(pnlChild);
+            pnlMain.Dock = DockStyle.Fill;
+            pnlMain.Location = new Point(302, 48);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Size = new Size(1134, 715);
+            pnlMain.TabIndex = 5;
+            // 
             // pnlChild
             // 
             pnlChild.Controls.Add(panel5);
             pnlChild.Controls.Add(label1);
-            pnlChild.Controls.Add(dataGridView1);
+            pnlChild.Controls.Add(dataGridForEvents);
             pnlChild.Dock = DockStyle.Fill;
             pnlChild.ForeColor = Color.White;
             pnlChild.Location = new Point(0, 0);
@@ -412,24 +424,31 @@
             label1.TabIndex = 2;
             label1.Text = "Filter";
             // 
-            // dataGridView1
+            // dataGridForEvents
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Bottom;
-            dataGridView1.Location = new Point(0, 102);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1134, 613);
-            dataGridView1.TabIndex = 0;
+            dataGridForEvents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridForEvents.Dock = DockStyle.Bottom;
+            dataGridForEvents.Location = new Point(0, 102);
+            dataGridForEvents.Name = "dataGridForEvents";
+            dataGridForEvents.RowHeadersWidth = 51;
+            dataGridForEvents.Size = new Size(1134, 613);
+            dataGridForEvents.TabIndex = 0;
+            dataGridForEvents.CellContentClick += dataGridForEvents_CellContentClick;
             // 
-            // pnlMain
+            // btnBought
             // 
-            pnlMain.Controls.Add(pnlChild);
-            pnlMain.Dock = DockStyle.Fill;
-            pnlMain.Location = new Point(302, 48);
-            pnlMain.Name = "pnlMain";
-            pnlMain.Size = new Size(1134, 715);
-            pnlMain.TabIndex = 5;
+            btnBought.Dock = DockStyle.Top;
+            btnBought.FlatStyle = FlatStyle.Flat;
+            btnBought.ForeColor = Color.Gainsboro;
+            btnBought.Location = new Point(0, 554);
+            btnBought.Name = "btnBought";
+            btnBought.Padding = new Padding(10, 0, 0, 0);
+            btnBought.Size = new Size(302, 45);
+            btnBought.TabIndex = 8;
+            btnBought.Text = "Bought Tickets";
+            btnBought.TextAlign = ContentAlignment.MiddleLeft;
+            btnBought.UseVisualStyleBackColor = true;
+            btnBought.Visible = false;
             // 
             // MainForm
             // 
@@ -447,12 +466,12 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             pnlSubEvents.ResumeLayout(false);
+            pnlMain.ResumeLayout(false);
             pnlChild.ResumeLayout(false);
             pnlChild.PerformLayout();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            pnlMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridForEvents).EndInit();
             ResumeLayout(false);
         }
 
@@ -476,12 +495,13 @@
         private Button btnOthers;
         private Button button3;
         private Button button2;
+        private Panel pnlMain;
         private Panel pnlChild;
-        private DataGridView dataGridView1;
-        private Label label1;
         private Panel panel5;
         private Panel panel6;
         private TextBox txtLoginEmail;
-        private Panel pnlMain;
+        private Label label1;
+        private DataGridView dataGridForEvents;
+        private Button btnBought;
     }
 }
