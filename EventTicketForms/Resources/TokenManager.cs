@@ -8,6 +8,6 @@ namespace EventTicketForms.Resources
 {
     internal static class TokenManager
     {
-        public static string Token { get; set; }
+        public static string Token { get; set; } = string.Empty;
     }
 }

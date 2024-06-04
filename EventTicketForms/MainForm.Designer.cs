@@ -177,7 +177,7 @@
             btnFavorites.TextAlign = ContentAlignment.MiddleLeft;
             btnFavorites.UseVisualStyleBackColor = true;
             btnFavorites.Visible = false;
-            btnFavorites.Click += button2_Click;
+            btnFavorites.Click += btnFavorites_Click;
             // 
             // pnlSubEvents
             // 

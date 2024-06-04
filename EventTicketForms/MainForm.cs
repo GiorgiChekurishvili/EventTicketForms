@@ -28,14 +28,21 @@ namespace EventTicketForms
         }
         public void CheckIfUserLogin()
         {
-            if (TokenManager.Token != null)
+            if (TokenManager.Token != "")
             {
                 button3.Visible = false;
                 btnLogOut.Visible = true;
                 btnFavorites.Visible = true;
                 btnBought.Visible = true;
             }
-            
+            else
+            {
+                button3.Visible = true;
+                btnLogOut.Visible = false;
+                btnFavorites.Visible = false;
+                btnBought.Visible = false;
+            }
+
         }
         private void PopulateEventsList()
         {
@@ -64,7 +71,8 @@ namespace EventTicketForms
         }
         public async void FillDataGridAutomatically()
         {
-
+            pnlChild.Visible = true;
+            pnlChild.BringToFront();
             EventsShow events = new EventsShow();
             var json = await events.GetAllEvents();
             List<EventsDto>? allEvents = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -75,31 +83,13 @@ namespace EventTicketForms
                 dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                 dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 PopulateEventsList();
+                
+                   
+                
+                
             }
         }
-        private Form activeform = null;
-        public void openChildForm(Form childform)
-        {
-            try
-            {
-
-
-                if (activeform != null)
-                {
-                    activeform.Close();
-                }
-                activeform = childform;
-                childform.TopLevel = false;
-                childform.FormBorderStyle = FormBorderStyle.None;
-                childform.Dock = DockStyle.Fill;
-                pnlChild.Controls.Add(childform);
-                pnlChild.Tag = childform;
-                childform.BringToFront();
-                childform.Show();
-
-            }
-            catch { }
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -115,6 +105,8 @@ namespace EventTicketForms
         {
             try
             {
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEvents();
                 List<EventsDto>? allEvents = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -125,6 +117,7 @@ namespace EventTicketForms
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     PopulateEventsList();
+                    
                 }
                 if (pnlSubEvents.Visible == true)
                 {
@@ -142,7 +135,8 @@ namespace EventTicketForms
         {
             try
             {
-
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEventsByCategories(1);
                 List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -153,6 +147,7 @@ namespace EventTicketForms
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     PopulateEventsList();
+
                 }
             }
             catch { }
@@ -164,7 +159,8 @@ namespace EventTicketForms
             try
             {
 
-
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEventsByCategories(2);
                 List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -185,7 +181,8 @@ namespace EventTicketForms
             try
             {
 
-
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEventsByCategories(3);
                 List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -206,7 +203,8 @@ namespace EventTicketForms
             try
             {
 
-
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEventsByCategories(4);
                 List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -227,7 +225,8 @@ namespace EventTicketForms
             try
             {
 
-
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEventsByCategories(5);
                 List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -248,7 +247,8 @@ namespace EventTicketForms
             try
             {
 
-
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEventsByCategories(6);
                 List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -269,7 +269,8 @@ namespace EventTicketForms
             try
             {
 
-
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEventsByCategories(7);
                 List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -290,7 +291,8 @@ namespace EventTicketForms
             try
             {
 
-
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEventsByCategories(8);
                 List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -311,7 +313,8 @@ namespace EventTicketForms
             try
             {
 
-
+                pnlChild.Visible = true;
+                pnlChild.BringToFront();
                 EventsShow events = new EventsShow();
                 var json = await events.GetAllEventsByCategories(9);
                 List<EventsDto>? data = JsonConvert.DeserializeObject<List<EventsDto>>(json);
@@ -332,7 +335,7 @@ namespace EventTicketForms
             Authentication authentication = new Authentication(this);
             authentication.Show();
             authentication.FormClosed += (s, args) => this.Close();
-            
+
         }
 
         private void dataGridForEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -358,16 +361,41 @@ namespace EventTicketForms
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             TokenManager.Token = null;
             btnLogOut.Visible = false;
             button3.Visible = true;
+            btnBought.Visible = false;
+            btnFavorites.Visible = false;
+
+        }
+
+        private void btnFavorites_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new MyFavoritesForm());
+        }
+
+        private Form _activeform = null;
+        private void OpenChildForm(Form childform)
+        {
+            if (_activeform != null)
+            {
+                _activeform.Close();
+            }
+            _activeform = childform;
+            childform.TopLevel = false;
+            childform.FormBorderStyle = FormBorderStyle.None;
+            childform.Dock = DockStyle.Fill;
+            pnlMain.Controls.Add(childform);
+            pnlMain.Tag = childform;
+            childform.BringToFront();
+            childform.Show();
+            pnlMain.BringToFront();
+            pnlChild.Visible = false;
+
 
         }
     }

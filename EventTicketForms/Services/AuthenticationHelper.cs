@@ -10,7 +10,7 @@ using EventTicketForms.Resources;
 
 namespace EventTicketForms.Services
 {
-    internal class AuthenticationHelper : IAuthenticationHelper
+    internal class AuthenticationHelper
     {
         private readonly string loginUrl = "http://localhost:5172/api/Authentication/login";
         private readonly string registerUrl = "http://localhost:5172/api/Authentication/register";
