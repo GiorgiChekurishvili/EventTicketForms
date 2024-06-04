@@ -148,6 +148,7 @@
             btnBought.TextAlign = ContentAlignment.MiddleLeft;
             btnBought.UseVisualStyleBackColor = true;
             btnBought.Visible = false;
+            btnBought.Click += btnBought_Click;
             // 
             // button3
             // 

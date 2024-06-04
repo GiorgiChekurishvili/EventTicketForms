@@ -52,6 +52,7 @@ namespace EventTicketForms
                 DataGridViewRow row = dataGridForEvents.Rows[i];
                 if (!row.IsNewRow)
                 {
+                    int id = int.Parse(row.Cells["Id"].Value.ToString());
                     string eventName = row.Cells["EventName"].Value.ToString();
                     string eventDescription = row.Cells["EventDescription"].Value.ToString();
                     string eventLocation = row.Cells["EventLocation"].Value.ToString();
@@ -60,6 +61,7 @@ namespace EventTicketForms
 
                     _events.Add(new EventsDto
                     {
+                        Id = id,
                         EventName = eventName,
                         EventDescription = eventDescription,
                         EventLocation = eventLocation,
@@ -83,13 +85,13 @@ namespace EventTicketForms
                 dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                 dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 PopulateEventsList();
-                
-                   
-                
-                
+
+
+
+
             }
         }
-        
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -117,7 +119,7 @@ namespace EventTicketForms
                     dataGridForEvents.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridForEvents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     PopulateEventsList();
-                    
+
                 }
                 if (pnlSubEvents.Visible == true)
                 {
@@ -397,6 +399,11 @@ namespace EventTicketForms
             pnlChild.Visible = false;
 
 
+        }
+
+        private void btnBought_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new BoughtTicketsForm());
         }
     }
 }
