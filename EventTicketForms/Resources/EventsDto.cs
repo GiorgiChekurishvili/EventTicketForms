@@ -8,6 +8,7 @@ namespace EventTicketForms.Resources
 {
     internal class EventsDto
     {
+        public int Id { get; set; }
         public string EventName { get; set; }
         public string EventDescription { get; set; }
         public string EventLocation { get; set; }
