@@ -18,6 +18,7 @@ namespace EventTicketForms
     public partial class MyFavoritesForm : Form
     {
         private readonly string viewFavorites = "http://localhost:5172/api/Favorite/viewmyfavorites";
+        private readonly string removeFavorites = "http://localhost:5172/api/Favorite/unfavoriteevent/";
         private string _token;
         List<EventsDto> _events = new List<EventsDto>();
         public MyFavoritesForm()
@@ -84,6 +85,7 @@ namespace EventTicketForms
                 DataGridViewRow row = dataGridForFavorites.Rows[i];
                 if (!row.IsNewRow)
                 {
+                    int id = int.Parse(row.Cells["Id"].Value.ToString());
                     string eventName = row.Cells["EventName"].Value.ToString();
                     string eventDescription = row.Cells["EventDescription"].Value.ToString();
                     string eventLocation = row.Cells["EventLocation"].Value.ToString();
@@ -92,12 +94,36 @@ namespace EventTicketForms
 
                     _events.Add(new EventsDto
                     {
+                        Id = id,
                         EventName = eventName,
                         EventDescription = eventDescription,
                         EventLocation = eventLocation,
                         Capacity = eventCapacity,
                         EventDate = eventDate
                     });
+                }
+            }
+        }
+
+        private async void dataGridForFavorites_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            var user = _events[index];
+            int favoritesId = user.Id;
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                using (HttpResponseMessage response = await client.DeleteAsync(removeFavorites + favoritesId))
+                {
+                    if (Convert.ToInt32(response.StatusCode) == 401)
+                    {
+                        MessageBox.Show("Unauthorized");
+                    }
+                    else if (Convert.ToInt32(response.StatusCode) == 200)
+                    {
+                        MessageBox.Show("Successfully removed");
+                        ViewMyFavorites();
+                    }
                 }
             }
         }

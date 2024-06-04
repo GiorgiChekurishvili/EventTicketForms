@@ -77,6 +77,7 @@
             dataGridForFavorites.RowHeadersWidth = 51;
             dataGridForFavorites.Size = new Size(1134, 613);
             dataGridForFavorites.TabIndex = 5;
+            dataGridForFavorites.CellContentClick += dataGridForFavorites_CellContentClick;
             // 
             // MyFavoritesForm
             // 
