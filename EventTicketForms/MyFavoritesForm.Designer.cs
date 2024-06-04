@@ -63,10 +63,10 @@
             txtSearch.ForeColor = Color.Gray;
             txtSearch.Location = new Point(3, 5);
             txtSearch.Name = "txtSearch";
-            txtSearch.PlaceholderText = "Search An  Event";
+            txtSearch.PlaceholderText = "Search";
             txtSearch.Size = new Size(477, 29);
             txtSearch.TabIndex = 2;
-            txtSearch.Text = "Search";
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // dataGridForFavorites
             // 

@@ -19,12 +19,13 @@ namespace EventTicketForms
     {
         private readonly string viewFavorites = "http://localhost:5172/api/Favorite/viewmyfavorites";
         private string _token;
+        List<EventsDto> _events = new List<EventsDto>();
         public MyFavoritesForm()
         {
             InitializeComponent();
             _token = TokenManager.Token;
             ViewMyFavorites();
-
+            PopulateEventsList();
         }
         private async void ViewMyFavorites()
         {
@@ -49,6 +50,7 @@ namespace EventTicketForms
                                 dataGridForFavorites.DataSource = json;
                                 dataGridForFavorites.DefaultCellStyle.ForeColor = Color.Black;
                                 dataGridForFavorites.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                                PopulateEventsList();
                             }
                         }
                     }
@@ -58,6 +60,46 @@ namespace EventTicketForms
         private void MyFavoritesForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string filterText = txtSearch.Text.ToLower();
+
+            if (string.IsNullOrEmpty(filterText))
+            {
+                dataGridForFavorites.DataSource = _events;
+            }
+            if (dataGridForFavorites.DataSource is List<EventsDto> events)
+            {
+                var filteredEvents = events.Where(e => e.EventName.ToLower().Contains(filterText)).ToList();
+                dataGridForFavorites.DataSource = filteredEvents;
+            }
+        }
+        private void PopulateEventsList()
+        {
+            _events.Clear();
+            for (int i = 0; i < dataGridForFavorites.Rows.Count; i++)
+            {
+                DataGridViewRow row = dataGridForFavorites.Rows[i];
+                if (!row.IsNewRow)
+                {
+                    string eventName = row.Cells["EventName"].Value.ToString();
+                    string eventDescription = row.Cells["EventDescription"].Value.ToString();
+                    string eventLocation = row.Cells["EventLocation"].Value.ToString();
+                    int eventCapacity = int.Parse(row.Cells["Capacity"].Value.ToString());
+                    DateTime eventDate = Convert.ToDateTime(row.Cells["EventDate"].Value);
+
+                    _events.Add(new EventsDto
+                    {
+                        EventName = eventName,
+                        EventDescription = eventDescription,
+                        EventLocation = eventLocation,
+                        Capacity = eventCapacity,
+                        EventDate = eventDate
+                    });
+                }
+            }
         }
     }
 }
