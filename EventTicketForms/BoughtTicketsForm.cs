@@ -17,7 +17,7 @@ namespace EventTicketForms
     {
         private readonly string myTickets = "http://localhost:5172/api/Ticket/viewmytickets";
         private string _token;
-        List<EventsDto> _events = new List<EventsDto>();
+        List<BoughtTicketsDto> _boughtTickets = new List<BoughtTicketsDto>();
         public BoughtTicketsForm()
         {
             InitializeComponent();
@@ -47,6 +47,7 @@ namespace EventTicketForms
                                 dataGridForBoughtTickets.DataSource = data;
                                 dataGridForBoughtTickets.DefaultCellStyle.ForeColor = Color.Black;
                                 dataGridForBoughtTickets.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                                PopulateBoughtTicketsList();
                             }
                             else
                             {
@@ -61,9 +62,9 @@ namespace EventTicketForms
                 }
             }
         }
-        private void PopulateEventsList()
+        private void PopulateBoughtTicketsList()
         {
-            _events.Clear();
+            _boughtTickets.Clear();
             for (int i = 0; i < dataGridForBoughtTickets.Rows.Count; i++)
             {
                 DataGridViewRow row = dataGridForBoughtTickets.Rows[i];
@@ -71,26 +72,36 @@ namespace EventTicketForms
                 {
                     int id = int.Parse(row.Cells["Id"].Value.ToString());
                     string eventName = row.Cells["EventName"].Value.ToString();
-                    string eventDescription = row.Cells["EventDescription"].Value.ToString();
-                    string eventLocation = row.Cells["EventLocation"].Value.ToString();
-                    int eventCapacity = int.Parse(row.Cells["Capacity"].Value.ToString());
-                    DateTime eventDate = Convert.ToDateTime(row.Cells["EventDate"].Value);
+                    string tickettypename = row.Cells["TicketTypeName"].Value.ToString();
+                    int ticketquantity = int.Parse(row.Cells["TicketQuantity"].Value.ToString());
+                    decimal totalprice = Convert.ToDecimal(row.Cells["TotalPrice"].Value.ToString());
+                    DateTime purchasedate = Convert.ToDateTime(row.Cells["PurchaseDate"].Value);
 
-                    _events.Add(new EventsDto
+                    _boughtTickets.Add(new  BoughtTicketsDto
                     {
                         Id = id,
                         EventName = eventName,
-                        EventDescription = eventDescription,
-                        EventLocation = eventLocation,
-                        Capacity = eventCapacity,
-                        EventDate = eventDate
+                        TicketTypeName = tickettypename,
+                        TicketQuantity = ticketquantity,
+                        TotalPrice = totalprice,
+                        PurchaseDate = purchasedate
                     });
                 }
             }
         }
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
+            string filterText = txtFilter.Text.ToLower();
 
+            if (string.IsNullOrEmpty(filterText))
+            {
+                dataGridForBoughtTickets.DataSource = _boughtTickets;
+            }
+            if (dataGridForBoughtTickets.DataSource is List<BoughtTicketsDto> events)
+            {
+                var filteredEvents = events.Where(e => e.EventName.ToLower().Contains(filterText)).ToList();
+                dataGridForBoughtTickets.DataSource = filteredEvents;
+            }
         }
 
         private void dataGridForBoughtTickets_CellContentClick(object sender, DataGridViewCellEventArgs e)
