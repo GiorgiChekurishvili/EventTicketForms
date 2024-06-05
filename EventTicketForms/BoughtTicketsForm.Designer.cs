@@ -31,9 +31,9 @@
             panel5 = new Panel();
             panel6 = new Panel();
             txtFilter = new TextBox();
-            dataGridForEvents = new DataGridView();
+            dataGridForBoughtTickets = new DataGridView();
             panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridForEvents).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridForBoughtTickets).BeginInit();
             SuspendLayout();
             // 
             // panel5
@@ -68,15 +68,16 @@
             txtFilter.TabIndex = 2;
             txtFilter.TextChanged += txtFilter_TextChanged;
             // 
-            // dataGridForEvents
+            // dataGridForBoughtTickets
             // 
-            dataGridForEvents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridForEvents.Dock = DockStyle.Bottom;
-            dataGridForEvents.Location = new Point(0, 102);
-            dataGridForEvents.Name = "dataGridForEvents";
-            dataGridForEvents.RowHeadersWidth = 51;
-            dataGridForEvents.Size = new Size(1134, 613);
-            dataGridForEvents.TabIndex = 5;
+            dataGridForBoughtTickets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridForBoughtTickets.Dock = DockStyle.Bottom;
+            dataGridForBoughtTickets.Location = new Point(0, 102);
+            dataGridForBoughtTickets.Name = "dataGridForBoughtTickets";
+            dataGridForBoughtTickets.RowHeadersWidth = 51;
+            dataGridForBoughtTickets.Size = new Size(1134, 613);
+            dataGridForBoughtTickets.TabIndex = 5;
+            dataGridForBoughtTickets.CellContentClick += dataGridForBoughtTickets_CellContentClick;
             // 
             // BoughtTicketsForm
             // 
@@ -85,13 +86,13 @@
             BackColor = Color.FromArgb(30, 30, 30);
             ClientSize = new Size(1134, 715);
             Controls.Add(panel5);
-            Controls.Add(dataGridForEvents);
+            Controls.Add(dataGridForBoughtTickets);
             FormBorderStyle = FormBorderStyle.None;
             Name = "BoughtTicketsForm";
             Text = "BoughtTicketsForm";
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridForEvents).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridForBoughtTickets).EndInit();
             ResumeLayout(false);
         }
 
@@ -100,6 +101,6 @@
         private Panel panel5;
         private Panel panel6;
         private TextBox txtFilter;
-        private DataGridView dataGridForEvents;
+        private DataGridView dataGridForBoughtTickets;
     }
 }
