@@ -33,9 +33,7 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             panel2 = new Panel();
-            btnLogOut = new Button();
             btnBought = new Button();
-            button3 = new Button();
             btnFavorites = new Button();
             pnlSubEvents = new Panel();
             btnOthers = new Button();
@@ -48,6 +46,8 @@
             btnComedy = new Button();
             btnSports = new Button();
             btnEvents = new Button();
+            btnLogOut = new Button();
+            button3 = new Button();
             panel3 = new Panel();
             pnlMain = new Panel();
             pnlChild = new Panel();
@@ -67,7 +67,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Gold;
+            panel1.BackColor = Color.Orange;
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(button1);
             panel1.Dock = DockStyle.Top;
@@ -106,33 +106,18 @@
             // 
             panel2.AutoScroll = true;
             panel2.BackColor = Color.FromArgb(17, 53, 71);
-            panel2.Controls.Add(btnLogOut);
             panel2.Controls.Add(btnBought);
-            panel2.Controls.Add(button3);
             panel2.Controls.Add(btnFavorites);
             panel2.Controls.Add(pnlSubEvents);
             panel2.Controls.Add(btnEvents);
+            panel2.Controls.Add(btnLogOut);
+            panel2.Controls.Add(button3);
             panel2.Controls.Add(panel3);
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(0, 48);
             panel2.Name = "panel2";
             panel2.Size = new Size(302, 715);
             panel2.TabIndex = 1;
-            // 
-            // btnLogOut
-            // 
-            btnLogOut.FlatStyle = FlatStyle.Flat;
-            btnLogOut.ForeColor = Color.Gainsboro;
-            btnLogOut.Location = new Point(0, 667);
-            btnLogOut.Name = "btnLogOut";
-            btnLogOut.Padding = new Padding(10, 0, 0, 0);
-            btnLogOut.Size = new Size(302, 45);
-            btnLogOut.TabIndex = 9;
-            btnLogOut.Text = "Log Out";
-            btnLogOut.TextAlign = ContentAlignment.MiddleLeft;
-            btnLogOut.UseVisualStyleBackColor = true;
-            btnLogOut.Visible = false;
-            btnLogOut.Click += btnLogOut_Click;
             // 
             // btnBought
             // 
@@ -149,20 +134,6 @@
             btnBought.UseVisualStyleBackColor = true;
             btnBought.Visible = false;
             btnBought.Click += btnBought_Click;
-            // 
-            // button3
-            // 
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.ForeColor = Color.Gainsboro;
-            button3.Location = new Point(0, 667);
-            button3.Name = "button3";
-            button3.Padding = new Padding(10, 0, 0, 0);
-            button3.Size = new Size(302, 45);
-            button3.TabIndex = 7;
-            button3.Text = "Log in";
-            button3.TextAlign = ContentAlignment.MiddleLeft;
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // btnFavorites
             // 
@@ -385,6 +356,35 @@
             btnEvents.TextAlign = ContentAlignment.MiddleLeft;
             btnEvents.UseVisualStyleBackColor = true;
             btnEvents.Click += btnEvents_Click;
+            // 
+            // btnLogOut
+            // 
+            btnLogOut.FlatStyle = FlatStyle.Flat;
+            btnLogOut.ForeColor = Color.Gainsboro;
+            btnLogOut.Location = new Point(0, 667);
+            btnLogOut.Name = "btnLogOut";
+            btnLogOut.Padding = new Padding(10, 0, 0, 0);
+            btnLogOut.Size = new Size(302, 45);
+            btnLogOut.TabIndex = 9;
+            btnLogOut.Text = "Log Out";
+            btnLogOut.TextAlign = ContentAlignment.MiddleLeft;
+            btnLogOut.UseVisualStyleBackColor = true;
+            btnLogOut.Visible = false;
+            btnLogOut.Click += btnLogOut_Click;
+            // 
+            // button3
+            // 
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.ForeColor = Color.Gainsboro;
+            button3.Location = new Point(0, 667);
+            button3.Name = "button3";
+            button3.Padding = new Padding(10, 0, 0, 0);
+            button3.Size = new Size(302, 45);
+            button3.TabIndex = 7;
+            button3.Text = "Log in";
+            button3.TextAlign = ContentAlignment.MiddleLeft;
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // panel3
             // 

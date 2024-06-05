@@ -342,7 +342,11 @@ namespace EventTicketForms
 
         private void dataGridForEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            int index = e.RowIndex;
+            var user = _events[index];
+            int eventid = user.Id;
+            EventModifier modifier = new EventModifier(eventid);
+            modifier.Show();
         }
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
@@ -404,6 +408,11 @@ namespace EventTicketForms
         private void btnBought_Click(object sender, EventArgs e)
         {
             OpenChildForm(new BoughtTicketsForm());
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
