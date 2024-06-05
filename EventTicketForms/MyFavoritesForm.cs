@@ -26,7 +26,6 @@ namespace EventTicketForms
             InitializeComponent();
             _token = TokenManager.Token;
             ViewMyFavorites();
-            PopulateEventsList();
         }
         private async void ViewMyFavorites()
         {
