@@ -414,6 +414,7 @@
             pnlChild.Name = "pnlChild";
             pnlChild.Size = new Size(1134, 715);
             pnlChild.TabIndex = 2;
+            pnlChild.Paint += pnlChild_Paint;
             // 
             // panel5
             // 

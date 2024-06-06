@@ -414,5 +414,10 @@ namespace EventTicketForms
         {
 
         }
+
+        private void pnlChild_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
