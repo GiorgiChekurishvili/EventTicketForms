@@ -106,7 +106,14 @@ namespace EventTicketForms
 
         private void dataGridForBoughtTickets_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Click only on event");
+            }
         }
     }
 }

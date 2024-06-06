@@ -342,11 +342,18 @@ namespace EventTicketForms
 
         private void dataGridForEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int index = e.RowIndex;
-            var user = _events[index];
-            int eventid = user.Id;
-            EventModifier modifier = new EventModifier(eventid);
-            modifier.Show();
+            try
+            {
+                int index = e.RowIndex;
+                var user = _events[index];
+                int eventid = user.Id;
+                EventModifier modifier = new EventModifier(eventid);
+                modifier.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Click only on event");
+            }
         }
 
         private void txtFilter_TextChanged(object sender, EventArgs e)

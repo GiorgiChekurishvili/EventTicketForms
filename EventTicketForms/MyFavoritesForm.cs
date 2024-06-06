@@ -29,32 +29,39 @@ namespace EventTicketForms
         }
         private async void ViewMyFavorites()
         {
-            using (HttpClient client = new HttpClient())
+            try
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
-                using (HttpResponseMessage response = await client.GetAsync(viewFavorites))
+                using (HttpClient client = new HttpClient())
                 {
-                    if (Convert.ToInt32(response.StatusCode) == 401)
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                    using (HttpResponseMessage response = await client.GetAsync(viewFavorites))
                     {
-                        MessageBox.Show("Unauthorized");
-                    }
-                    if (Convert.ToInt32(response.StatusCode) == 200)
-                    {
-                        using (HttpContent content = response.Content)
+                        if (Convert.ToInt32(response.StatusCode) == 401)
                         {
-                            var data = await content.ReadAsStringAsync();
-                            var json = JsonConvert.DeserializeObject<List<EventsDto>>(data);
-                            dataGridForFavorites.DataSource = null;
-                            if (json != null)
+                            MessageBox.Show("Unauthorized");
+                        }
+                        if (Convert.ToInt32(response.StatusCode) == 200)
+                        {
+                            using (HttpContent content = response.Content)
                             {
-                                dataGridForFavorites.DataSource = json;
-                                dataGridForFavorites.DefaultCellStyle.ForeColor = Color.Black;
-                                dataGridForFavorites.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                                PopulateEventsList();
+                                var data = await content.ReadAsStringAsync();
+                                var json = JsonConvert.DeserializeObject<List<EventsDto>>(data);
+                                dataGridForFavorites.DataSource = null;
+                                if (json != null)
+                                {
+                                    dataGridForFavorites.DataSource = json;
+                                    dataGridForFavorites.DefaultCellStyle.ForeColor = Color.Black;
+                                    dataGridForFavorites.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                                    PopulateEventsList();
+                                }
                             }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Click only on event");
             }
         }
         private void MyFavoritesForm_Load(object sender, EventArgs e)
@@ -106,42 +113,51 @@ namespace EventTicketForms
 
         private async void dataGridForFavorites_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int index = e.RowIndex;
-            var user = _events[index];
-            int favoritesId = user.Id;
-            DialogResult result = MessageBox.Show(
-                        "Are you sure you want to remove this event from your favorites?",
-                        "Delete From Favorites",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question
-                        );
-
-            if (result == DialogResult.Yes)
+            try
             {
-                using (HttpClient client = new HttpClient())
+
+
+                int index = e.RowIndex;
+                var user = _events[index];
+                int favoritesId = user.Id;
+                DialogResult result = MessageBox.Show(
+                            "Are you sure you want to remove this event from your favorites?",
+                            "Delete From Favorites",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question
+                            );
+
+                if (result == DialogResult.Yes)
                 {
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
-                    using (HttpResponseMessage response = await client.DeleteAsync(removeFavorites + favoritesId))
+                    using (HttpClient client = new HttpClient())
                     {
-
-                        if (Convert.ToInt32(response.StatusCode) == 401)
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                        using (HttpResponseMessage response = await client.DeleteAsync(removeFavorites + favoritesId))
                         {
-                            MessageBox.Show("Unauthorized");
+
+                            if (Convert.ToInt32(response.StatusCode) == 401)
+                            {
+                                MessageBox.Show("Unauthorized");
+                            }
+                            else if (Convert.ToInt32(response.StatusCode) == 200)
+                            {
+
+                                MessageBox.Show("Successfully removed the event", "Removed Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ViewMyFavorites();
+                            };
+
                         }
-                        else if (Convert.ToInt32(response.StatusCode) == 200)
-                        {
-
-                            MessageBox.Show("Successfully removed the event", "Removed Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ViewMyFavorites();
-                        };
-                        
                     }
                 }
-            }
 
-            else
+                else
+                {
+                    MessageBox.Show("Event remove from favorites canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch(Exception ex)
             {
-                MessageBox.Show("Event remove from favorites canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Click only on event");
             }
         }
         
