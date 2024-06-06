@@ -108,7 +108,7 @@ namespace EventTicketForms
                         }
                         else if(Convert.ToInt32(response.StatusCode) == 400)
                         {
-                            MessageBox.Show("All Tickets Have Been Sold");
+                            MessageBox.Show("Ticket can't be bought");
                         }
                         else { MessageBox.Show("Internal Server Error"); }
                     }

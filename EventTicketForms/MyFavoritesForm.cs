@@ -150,10 +150,6 @@ namespace EventTicketForms
                     }
                 }
 
-                else
-                {
-                    MessageBox.Show("Event remove from favorites canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
             catch(Exception ex)
             {
