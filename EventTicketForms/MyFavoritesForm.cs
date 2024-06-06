@@ -109,22 +109,41 @@ namespace EventTicketForms
             int index = e.RowIndex;
             var user = _events[index];
             int favoritesId = user.Id;
-            using (HttpClient client = new HttpClient())
+            DialogResult result = MessageBox.Show(
+                        "Are you sure you want to remove this event from your favorites?",
+                        "Delete From Favorites",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                        );
+
+            if (result == DialogResult.Yes)
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
-                using (HttpResponseMessage response = await client.DeleteAsync(removeFavorites + favoritesId))
+                using (HttpClient client = new HttpClient())
                 {
-                    if (Convert.ToInt32(response.StatusCode) == 401)
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                    using (HttpResponseMessage response = await client.DeleteAsync(removeFavorites + favoritesId))
                     {
-                        MessageBox.Show("Unauthorized");
-                    }
-                    else if (Convert.ToInt32(response.StatusCode) == 200)
-                    {
-                        MessageBox.Show("Successfully removed");
-                        ViewMyFavorites();
+
+                        if (Convert.ToInt32(response.StatusCode) == 401)
+                        {
+                            MessageBox.Show("Unauthorized");
+                        }
+                        else if (Convert.ToInt32(response.StatusCode) == 200)
+                        {
+
+                            MessageBox.Show("Successfully removed the event", "Removed Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ViewMyFavorites();
+                        };
+                        
                     }
                 }
             }
+
+            else
+            {
+                MessageBox.Show("Event remove from favorites canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+        
     }
 }
