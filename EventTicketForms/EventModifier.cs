@@ -73,7 +73,8 @@ namespace EventTicketForms
 
         private void btnBuyTicket_Click(object sender, EventArgs e)
         {
-
+            BuyTicketForm buyTicketForm = new BuyTicketForm(_eventId,txtEventName.Text);
+            buyTicketForm.Show();
         }
 
         private async void btnAddFavorites_Click(object sender, EventArgs e)
@@ -90,6 +91,10 @@ namespace EventTicketForms
                     if (Convert.ToInt32(response.StatusCode) == 200)
                     {
                         MessageBox.Show("Successfully Added To Your Favorites");
+                    }
+                    else if(Convert.ToInt32(response.StatusCode) == 400)
+                    {
+                        MessageBox.Show("This event is already in your favorites");
                     }
                     else { MessageBox.Show("Internal Server Error"); }
                 }
