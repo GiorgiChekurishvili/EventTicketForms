@@ -140,7 +140,7 @@ namespace EventTicketForms
                     ConfirmPassword = txtForgotPasswordConfirm.Text,
                 };
                 authentication.ChangePassword(registerEntity);
-                
+
             }
 
         }
@@ -170,7 +170,7 @@ namespace EventTicketForms
                 TokenManager.Token = response;
                 this.Hide();
                 _mainform.CheckIfUserLogin();
-                
+
 
             }
 
@@ -211,7 +211,7 @@ namespace EventTicketForms
                     pnlChangePassword.Visible = true;
                     pnlChangePassword.Dock = DockStyle.Fill;
                 }
-                
+
 
             }
         }
@@ -228,6 +228,11 @@ namespace EventTicketForms
             pnlForgetPassword.Dock = DockStyle.None;
             pnlChangePassword.Visible = true;
             pnlChangePassword.Dock = DockStyle.Fill;
+        }
+
+        private void pnlLogin_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

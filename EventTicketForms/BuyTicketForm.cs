@@ -11,12 +11,14 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace EventTicketForms
 {
     public partial class BuyTicketForm : Form
     {
         private readonly string _getTicketTypesUrl = "http://localhost:5172/api/TicketType/seetickettypes/";
+        private readonly string _buyTicketUrl = "http://localhost:5172/api/Ticket/buyticket/";
         private int _eventId;
         private string _eventName;
         List<TicketTypesDto> _data = new List<TicketTypesDto>();
@@ -73,7 +75,7 @@ namespace EventTicketForms
             this.Close();
         }
 
-        private void btnBuyTicket_Click(object sender, EventArgs e)
+        private async void btnBuyTicket_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
                "Are you sure you want to buy this ticket?",
@@ -84,7 +86,34 @@ namespace EventTicketForms
 
             if (result == DialogResult.Yes)
             {
-                MessageBox.Show("You have bought the ticket. Check your email or the tab 'BoughtTickets'", "Purchase Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
+                int selectedId = Convert.ToInt32(comboboxTicketType.SelectedValue);
+                var inputdata = new
+                {
+                    _eventId,
+                    selectedId,
+                    numberOfTickets
+
+                };
+                var json = JsonConvert.SerializeObject(inputdata);
+                var input = new StringContent(json, Encoding.UTF8, "application/json");
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.Token);
+                    using (HttpResponseMessage response = await client.PostAsync($"{_buyTicketUrl}{_eventId}/{selectedId}/{numberOfTickets}",input ))
+                    {
+                        if (Convert.ToInt32(response.StatusCode) == 200)
+                        {
+                            MessageBox.Show("You have bought the ticket. Check your email or the tab 'BoughtTickets'", "Purchase Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else if(Convert.ToInt32(response.StatusCode) == 400)
+                        {
+                            MessageBox.Show("All Tickets Have Been Sold");
+                        }
+                        else { MessageBox.Show("Internal Server Error"); }
+                    }
+                }
+                
             }
             else
             {

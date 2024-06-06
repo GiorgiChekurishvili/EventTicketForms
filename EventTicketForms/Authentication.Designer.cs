@@ -833,6 +833,7 @@
             pnlLogin.Name = "pnlLogin";
             pnlLogin.Size = new Size(844, 442);
             pnlLogin.TabIndex = 2;
+            pnlLogin.Paint += pnlLogin_Paint;
             // 
             // pnlForgetPassword
             // 
