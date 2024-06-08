@@ -1,6 +1,7 @@
 using EventTicketForms.Entities;
 using EventTicketForms.Resources;
 using EventTicketForms.Services;
+using System.IdentityModel.Tokens.Jwt;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EventTicketForms
@@ -167,7 +168,10 @@ namespace EventTicketForms
             }
             else
             {
-                TokenManager.Token = response;
+                StaticResources.Token = response;
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadToken(StaticResources.Token) as JwtSecurityToken;
+                StaticResources.Role = jsonToken.Claims.First(claim => claim.Type == "role").Value;
                 this.Hide();
                 _mainform.CheckIfUserLogin();
 
