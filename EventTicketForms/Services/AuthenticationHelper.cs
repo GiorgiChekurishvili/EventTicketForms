@@ -7,6 +7,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using EventTicketForms.Entities;
 using EventTicketForms.Resources;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace EventTicketForms.Services
 {
@@ -57,16 +58,14 @@ namespace EventTicketForms.Services
             {
                 using (HttpResponseMessage response = await client.PostAsync(registerUrl, input))
                 {
-                    using (HttpContent content = response.Content)
+                    switch (Convert.ToInt32(response.StatusCode))
                     {
-                        switch (Convert.ToInt32(response.StatusCode))
-                        {
-                            case 409: MessageBox.Show("User With This Email Address Already Exists"); break;
-                            case 400: MessageBox.Show("Invalid Email Address or The Passwords Don't Match"); break;
-                            case 200: MessageBox.Show("Successfully Registered, Please Verify"); break;
-                            default: MessageBox.Show("Error"); break;
-                        }
+                        case 409: MessageBox.Show("User With This Email Address Already Exists"); break;
+                        case 400: MessageBox.Show("Invalid Email Address or The Passwords Don't Match"); break;
+                        case 200: MessageBox.Show("Successfully Registered, Please Verify"); break;
+                        default: MessageBox.Show("Error"); break;
                     }
+                    
                 }
             }
         }
@@ -78,21 +77,19 @@ namespace EventTicketForms.Services
             {
                 using (HttpResponseMessage response = await client.PostAsync($"{verifyAccountUrl}/{token}", input))
                 {
-                    using (HttpContent content = response.Content)
+                    if (Convert.ToInt32(response.StatusCode) == 401)
                     {
-                        if (Convert.ToInt32(response.StatusCode) == 401)
-                        {
-                            MessageBox.Show("Invalid Token");
-                        }
-                        else if (Convert.ToInt32(response.StatusCode) == 200)
-                        {
-                            MessageBox.Show("Successfully Verified");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error");
-                        }
+                        MessageBox.Show("Invalid Token");
                     }
+                    else if (Convert.ToInt32(response.StatusCode) == 200)
+                    {
+                        MessageBox.Show("Successfully Verified");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error");
+                    }
+
                 }
             }
             {
@@ -107,24 +104,22 @@ namespace EventTicketForms.Services
             {
                 using (HttpResponseMessage response = await client.PostAsync($"{forgotPasswordUrl}/{email}", input))
                 {
-                    using (HttpContent content = response.Content)
+                    if (Convert.ToInt32(response.StatusCode) == 400)
                     {
-                        if (Convert.ToInt32(response.StatusCode) == 400)
-                        {
-                            MessageBox.Show("Email Address Isnt Registered");
-                            return 400;
-                        }
-                        else if (Convert.ToInt32(response.StatusCode) == 200)
-                        {
-                            MessageBox.Show("A Key Has Been Send To Your Email Address.");
-                            return 200;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error");
-                            return 0;
-                        }
+                        MessageBox.Show("Email Address Isnt Registered");
+                        return 400;
                     }
+                    else if (Convert.ToInt32(response.StatusCode) == 200)
+                    {
+                        MessageBox.Show("A Key Has Been Send To Your Email Address.");
+                        return 200;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error");
+                        return 0;
+                    }
+
                 }
             }
             {
