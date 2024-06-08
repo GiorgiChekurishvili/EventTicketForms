@@ -21,7 +21,7 @@ namespace EventTicketForms
         public BoughtTicketsForm()
         {
             InitializeComponent();
-            _token = TokenManager.Token;
+            _token = StaticResources.Token;
             SeeMyTickets();
         }
         private async void SeeMyTickets()
@@ -77,7 +77,7 @@ namespace EventTicketForms
                     decimal totalprice = Convert.ToDecimal(row.Cells["TotalPrice"].Value.ToString());
                     DateTime purchasedate = Convert.ToDateTime(row.Cells["PurchaseDate"].Value);
 
-                    _boughtTickets.Add(new  BoughtTicketsDto
+                    _boughtTickets.Add(new BoughtTicketsDto
                     {
                         Id = id,
                         EventName = eventName,
@@ -114,6 +114,11 @@ namespace EventTicketForms
             {
                 MessageBox.Show("Click only on event");
             }
+        }
+
+        private void BoughtTicketsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

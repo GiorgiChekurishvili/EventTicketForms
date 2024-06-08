@@ -48,6 +48,7 @@
             // 
             // comboboxTicketType
             // 
+            comboboxTicketType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboboxTicketType.Font = new Font("Bahnschrift", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             comboboxTicketType.ForeColor = SystemColors.WindowFrame;
             comboboxTicketType.FormattingEnabled = true;

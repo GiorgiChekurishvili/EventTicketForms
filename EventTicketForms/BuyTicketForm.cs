@@ -34,7 +34,7 @@ namespace EventTicketForms
         {
             using (HttpClient client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.Token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", StaticResources.Token);
                 using (HttpResponseMessage response = await client.GetAsync(_getTicketTypesUrl + _eventId))
                 {
                     if (Convert.ToInt32(response.StatusCode) == 200)
@@ -99,7 +99,7 @@ namespace EventTicketForms
                 var input = new StringContent(json, Encoding.UTF8, "application/json");
                 using (HttpClient client = new HttpClient())
                 {
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.Token);
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", StaticResources.Token);
                     using (HttpResponseMessage response = await client.PostAsync($"{_buyTicketUrl}{_eventId}/{selectedId}/{numberOfTickets}",input ))
                     {
                         if (Convert.ToInt32(response.StatusCode) == 200)

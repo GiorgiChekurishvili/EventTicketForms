@@ -90,6 +90,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "BoughtTicketsForm";
             Text = "BoughtTicketsForm";
+            Load += BoughtTicketsForm_Load;
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridForBoughtTickets).EndInit();
