@@ -23,17 +23,25 @@ namespace EventTicketForms
         {
             InitializeComponent();
             FillDataGridAutomatically();
-            _token = TokenManager.Token;
+            _token = StaticResources.Token;
             CheckIfUserLogin();
         }
         public void CheckIfUserLogin()
         {
-            if (TokenManager.Token != "")
+            if (StaticResources.Token != "")
             {
                 button3.Visible = false;
                 btnLogOut.Visible = true;
-                btnFavorites.Visible = true;
-                btnBought.Visible = true;
+                if (StaticResources.Role == "admin")
+                {
+                    btnAddEvent.Visible = true;
+                    btnAddTicketType.Visible = true;
+                }
+                else if (StaticResources.Role == "member")
+                {
+                    btnFavorites.Visible = true;
+                    btnBought.Visible = true;
+                }
             }
             else
             {
@@ -41,6 +49,8 @@ namespace EventTicketForms
                 btnLogOut.Visible = false;
                 btnFavorites.Visible = false;
                 btnBought.Visible = false;
+                btnAddTicketType.Visible = false;
+                btnAddEvent.Visible = false;
             }
 
         }
@@ -71,8 +81,9 @@ namespace EventTicketForms
                 }
             }
         }
-        public async void FillDataGridAutomatically()
+        private async void FillDataGridAutomatically()
         {
+            dataGridForEvents.DataSource = null;
             pnlChild.Visible = true;
             pnlChild.BringToFront();
             EventsShow events = new EventsShow();
@@ -335,25 +346,35 @@ namespace EventTicketForms
         private void button3_Click(object sender, EventArgs e)
         {
             Authentication authentication = new Authentication(this);
-            authentication.Show();
+            authentication.ShowDialog();
             authentication.FormClosed += (s, args) => this.Close();
 
         }
 
         private void dataGridForEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
             try
             {
+
                 int index = e.RowIndex;
                 var user = _events[index];
                 int eventid = user.Id;
-                EventModifier modifier = new EventModifier(eventid);
-                modifier.Show();
+                EventShowFullyForm modifier = new EventShowFullyForm(eventid);
+                modifier.FormClosed += modifier_FormClosed;
+                modifier.ShowDialog();
+
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show("Click only on event");
             }
+
+        }
+        private void modifier_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FillDataGridAutomatically();
         }
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
@@ -378,11 +399,13 @@ namespace EventTicketForms
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            TokenManager.Token = null;
+            StaticResources.Token = null;
             btnLogOut.Visible = false;
             button3.Visible = true;
             btnBought.Visible = false;
             btnFavorites.Visible = false;
+            btnAddEvent.Visible = false;
+            btnAddTicketType.Visible = false;
 
         }
 
@@ -426,5 +449,17 @@ namespace EventTicketForms
         {
 
         }
+
+        private void btnAddEvent_Click(object sender, EventArgs e)
+        {
+            AddEventForm addEventForm = new AddEventForm();
+            addEventForm.Show();
+            addEventForm.FormClosed += btnAddEvent_FormClosed;
+        }
+        private void btnAddEvent_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FillDataGridAutomatically();
+        }
+        
     }
 }

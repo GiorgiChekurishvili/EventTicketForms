@@ -33,6 +33,8 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             panel2 = new Panel();
+            btnAddTicketType = new Button();
+            btnAddEvent = new Button();
             btnBought = new Button();
             btnFavorites = new Button();
             pnlSubEvents = new Panel();
@@ -106,6 +108,8 @@
             // 
             panel2.AutoScroll = true;
             panel2.BackColor = Color.FromArgb(17, 53, 71);
+            panel2.Controls.Add(btnAddTicketType);
+            panel2.Controls.Add(btnAddEvent);
             panel2.Controls.Add(btnBought);
             panel2.Controls.Add(btnFavorites);
             panel2.Controls.Add(pnlSubEvents);
@@ -119,12 +123,43 @@
             panel2.Size = new Size(302, 715);
             panel2.TabIndex = 1;
             // 
+            // btnAddTicketType
+            // 
+            btnAddTicketType.Dock = DockStyle.Top;
+            btnAddTicketType.FlatStyle = FlatStyle.Flat;
+            btnAddTicketType.ForeColor = Color.Gainsboro;
+            btnAddTicketType.Location = new Point(0, 612);
+            btnAddTicketType.Name = "btnAddTicketType";
+            btnAddTicketType.Padding = new Padding(10, 0, 0, 0);
+            btnAddTicketType.Size = new Size(302, 45);
+            btnAddTicketType.TabIndex = 11;
+            btnAddTicketType.Text = "Add TicketType";
+            btnAddTicketType.TextAlign = ContentAlignment.MiddleLeft;
+            btnAddTicketType.UseVisualStyleBackColor = true;
+            btnAddTicketType.Visible = false;
+            // 
+            // btnAddEvent
+            // 
+            btnAddEvent.Dock = DockStyle.Top;
+            btnAddEvent.FlatStyle = FlatStyle.Flat;
+            btnAddEvent.ForeColor = Color.Gainsboro;
+            btnAddEvent.Location = new Point(0, 567);
+            btnAddEvent.Name = "btnAddEvent";
+            btnAddEvent.Padding = new Padding(10, 0, 0, 0);
+            btnAddEvent.Size = new Size(302, 45);
+            btnAddEvent.TabIndex = 10;
+            btnAddEvent.Text = "Add Event";
+            btnAddEvent.TextAlign = ContentAlignment.MiddleLeft;
+            btnAddEvent.UseVisualStyleBackColor = true;
+            btnAddEvent.Visible = false;
+            btnAddEvent.Click += btnAddEvent_Click;
+            // 
             // btnBought
             // 
             btnBought.Dock = DockStyle.Top;
             btnBought.FlatStyle = FlatStyle.Flat;
             btnBought.ForeColor = Color.Gainsboro;
-            btnBought.Location = new Point(0, 554);
+            btnBought.Location = new Point(0, 522);
             btnBought.Name = "btnBought";
             btnBought.Padding = new Padding(10, 0, 0, 0);
             btnBought.Size = new Size(302, 45);
@@ -140,7 +175,7 @@
             btnFavorites.Dock = DockStyle.Top;
             btnFavorites.FlatStyle = FlatStyle.Flat;
             btnFavorites.ForeColor = Color.Gainsboro;
-            btnFavorites.Location = new Point(0, 509);
+            btnFavorites.Location = new Point(0, 477);
             btnFavorites.Name = "btnFavorites";
             btnFavorites.Padding = new Padding(10, 0, 0, 0);
             btnFavorites.Size = new Size(302, 45);
@@ -164,7 +199,7 @@
             pnlSubEvents.Controls.Add(btnComedy);
             pnlSubEvents.Controls.Add(btnSports);
             pnlSubEvents.Dock = DockStyle.Top;
-            pnlSubEvents.Location = new Point(0, 141);
+            pnlSubEvents.Location = new Point(0, 109);
             pnlSubEvents.Name = "pnlSubEvents";
             pnlSubEvents.Size = new Size(302, 368);
             pnlSubEvents.TabIndex = 5;
@@ -347,7 +382,7 @@
             btnEvents.Dock = DockStyle.Top;
             btnEvents.FlatStyle = FlatStyle.Flat;
             btnEvents.ForeColor = Color.Gainsboro;
-            btnEvents.Location = new Point(0, 96);
+            btnEvents.Location = new Point(0, 64);
             btnEvents.Name = "btnEvents";
             btnEvents.Padding = new Padding(10, 0, 0, 0);
             btnEvents.Size = new Size(302, 45);
@@ -361,7 +396,7 @@
             // 
             btnLogOut.FlatStyle = FlatStyle.Flat;
             btnLogOut.ForeColor = Color.Gainsboro;
-            btnLogOut.Location = new Point(0, 667);
+            btnLogOut.Location = new Point(0, 663);
             btnLogOut.Name = "btnLogOut";
             btnLogOut.Padding = new Padding(10, 0, 0, 0);
             btnLogOut.Size = new Size(302, 45);
@@ -392,7 +427,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(302, 96);
+            panel3.Size = new Size(302, 64);
             panel3.TabIndex = 1;
             // 
             // pnlMain
@@ -511,5 +546,7 @@
         private DataGridView dataGridForEvents;
         private Button btnBought;
         private Button btnLogOut;
+        private Button btnAddTicketType;
+        private Button btnAddEvent;
     }
 }
