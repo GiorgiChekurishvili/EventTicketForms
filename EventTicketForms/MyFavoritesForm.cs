@@ -24,7 +24,7 @@ namespace EventTicketForms
         public MyFavoritesForm()
         {
             InitializeComponent();
-            _token = TokenManager.Token;
+            _token = StaticResources.Token;
             ViewMyFavorites();
         }
         private async void ViewMyFavorites()
