@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace EventTicketForms
 {
@@ -20,15 +21,20 @@ namespace EventTicketForms
     {
         private readonly string _getTicketTypesUrl = "http://localhost:5172/api/TicketType/seetickettypes/";
         private readonly string _deleteTicketTypeUrl = "http://localhost:5172/api/TicketType/removetickettype/";
+        private readonly string _updateTicketTypeUrl = "http://localhost:5172/api/TicketType/changeeventtype/";
+
+
         List<TicketTypesDto> _ticketTypes = new List<TicketTypesDto>();
         private int _eventId;
         private string _eventName;
+        private int _ticketTypeId;
         public TicketTypeForm(int eventId, string eventName)
         {
             InitializeComponent();
             _eventId = eventId;
             _eventName = eventName;
             ShowTicketTypes();
+           
         }
 
         private async void ShowTicketTypes()
@@ -74,7 +80,7 @@ namespace EventTicketForms
 
         private void comboBoxTicketType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int _ticketTypeId = Convert.ToInt32(comboBoxTicketType.SelectedValue);
+            _ticketTypeId = Convert.ToInt32(comboBoxTicketType.SelectedValue);
             txtEventName.Text = _eventName;
             try
             {
@@ -102,8 +108,8 @@ namespace EventTicketForms
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", StaticResources.Token);
-                var tickettypeId = _ticketTypes.FirstOrDefault(x => x.Id == Convert.ToInt32(comboBoxTicketType.SelectedValue));
-                using (HttpResponseMessage response = await client.DeleteAsync(_deleteTicketTypeUrl + tickettypeId.Id + "/" + _eventId))
+                //var tickettypeId = _ticketTypes.FirstOrDefault(x => x.Id == Convert.ToInt32(comboBoxTicketType.SelectedValue));
+                using (HttpResponseMessage response = await client.DeleteAsync(_deleteTicketTypeUrl + _ticketTypeId + "/" + _eventId))
                 {
                     if (response.IsSuccessStatusCode)
                     {
@@ -115,9 +121,33 @@ namespace EventTicketForms
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", StaticResources.Token);
 
+                UpdateTicketTypeProperties ticketTypesDto = new UpdateTicketTypeProperties()
+                {
+                    EventId = _eventId,
+                    TicketTypeName = comboBoxTicketType.Text,
+                    Price = Convert.ToDecimal(txtPrice.Text),
+                    TotalTickets = int.Parse(txtTotalTickets.Text),
+                    SalesEndDate = Convert.ToDateTime($"{DateForSalesEnd.Text} {TimeForSalesEnd.Text}"),
+                    SalesStartDate = Convert.ToDateTime($"{dateForSalesStart.Text} {TimeForSalesStart.Text}")
+            };
+                var json = JsonConvert.SerializeObject(ticketTypesDto);
+                var inputdata = new StringContent(json, Encoding.UTF8, "application/json");
+                using (HttpResponseMessage response = await client.PutAsync(_updateTicketTypeUrl + _ticketTypeId, inputdata))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Successfully Updated Data");
+                        ShowTicketTypes();
+                    }
+                    else { MessageBox.Show("Internal Server Error"); }
+                }
+            }
         }
     }
 }
