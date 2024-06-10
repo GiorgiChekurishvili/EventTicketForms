@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace EventTicketForms
     public partial class TicketTypeForm : Form
     {
         private readonly string _getTicketTypesUrl = "http://localhost:5172/api/TicketType/seetickettypes/";
+        private readonly string _deleteTicketTypeUrl = "http://localhost:5172/api/TicketType/removetickettype/";
         List<TicketTypesDto> _ticketTypes = new List<TicketTypesDto>();
         private int _eventId;
         private string _eventName;
@@ -41,9 +43,19 @@ namespace EventTicketForms
                         {
                             var json = await content.ReadAsStringAsync();
                             _ticketTypes = JsonConvert.DeserializeObject<List<TicketTypesDto>>(json);
+                            if (_ticketTypes.Count == 0)
+                            {
+                                MessageBox.Show("There is no ticket types for this event, please add it");
+                                button1.Visible = false;
+                                button3.Visible = false;
+                                return;
+
+                            }
                             comboBoxTicketType.ValueMember = "Id";
                             comboBoxTicketType.DisplayMember = "TicketTypeName";
                             comboBoxTicketType.DataSource = _ticketTypes;
+                            button1.Visible = true;
+                            button3.Visible = true;
                         }
                     }
                     else if (Convert.ToInt32(response.StatusCode) == 404)
@@ -54,7 +66,7 @@ namespace EventTicketForms
                 }
             }
         }
-       
+
         private void TicketTypeForm_Load(object sender, EventArgs e)
         {
 
@@ -83,6 +95,29 @@ namespace EventTicketForms
         private void button4_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", StaticResources.Token);
+                var tickettypeId = _ticketTypes.FirstOrDefault(x => x.Id == Convert.ToInt32(comboBoxTicketType.SelectedValue));
+                using (HttpResponseMessage response = await client.DeleteAsync(_deleteTicketTypeUrl + tickettypeId.Id + "/" + _eventId))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Successfully deleted ticket type");
+                        ShowTicketTypes();
+                    }
+                    else { MessageBox.Show("Internal server error"); }
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
