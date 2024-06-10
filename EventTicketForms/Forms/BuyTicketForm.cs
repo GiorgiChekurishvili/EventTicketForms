@@ -21,7 +21,7 @@ namespace EventTicketForms
         private readonly string _buyTicketUrl = "http://localhost:5172/api/Ticket/buyticket/";
         private int _eventId;
         private string _eventName;
-        List<TicketTypesDto> _data = new List<TicketTypesDto>();
+        List<TicketTypesReturnDto> _data = new List<TicketTypesReturnDto>();
         private decimal numberOfTickets;
         public BuyTicketForm(int eventId, string eventName)
         {
@@ -42,7 +42,7 @@ namespace EventTicketForms
                         using (HttpContent content = response.Content)
                         {
                             var json = await content.ReadAsStringAsync();
-                            _data = JsonConvert.DeserializeObject<List<TicketTypesDto>>(json);
+                            _data = JsonConvert.DeserializeObject<List<TicketTypesReturnDto>>(json);
                             comboboxTicketType.ValueMember = "Id";
                             comboboxTicketType.DisplayMember = "TicketTypeName";
                             comboboxTicketType.DataSource = _data;

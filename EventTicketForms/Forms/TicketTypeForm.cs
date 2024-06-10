@@ -1,4 +1,5 @@
-﻿using EventTicketForms.Resources;
+﻿using EventTicketForms.Forms;
+using EventTicketForms.Resources;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -24,7 +25,7 @@ namespace EventTicketForms
         private readonly string _updateTicketTypeUrl = "http://localhost:5172/api/TicketType/changeeventtype/";
 
 
-        List<TicketTypesDto> _ticketTypes = new List<TicketTypesDto>();
+        List<TicketTypesReturnDto> _ticketTypes = new List<TicketTypesReturnDto>();
         private int _eventId;
         private string _eventName;
         private int _ticketTypeId;
@@ -34,7 +35,7 @@ namespace EventTicketForms
             _eventId = eventId;
             _eventName = eventName;
             ShowTicketTypes();
-           
+
         }
 
         private async void ShowTicketTypes()
@@ -48,7 +49,7 @@ namespace EventTicketForms
                         using (HttpContent content = response.Content)
                         {
                             var json = await content.ReadAsStringAsync();
-                            _ticketTypes = JsonConvert.DeserializeObject<List<TicketTypesDto>>(json);
+                            _ticketTypes = JsonConvert.DeserializeObject<List<TicketTypesReturnDto>>(json);
                             if (_ticketTypes.Count == 0)
                             {
                                 MessageBox.Show("There is no ticket types for this event, please add it");
@@ -66,7 +67,7 @@ namespace EventTicketForms
                     }
                     else if (Convert.ToInt32(response.StatusCode) == 404)
                     {
-                        MessageBox.Show("There is no ticket types for this event, please add it");
+                        MessageBox.Show("There is no ticket type for this event, please add it");
                     }
                     else { MessageBox.Show("internal server error"); }
                 }
@@ -127,7 +128,7 @@ namespace EventTicketForms
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", StaticResources.Token);
 
-                UpdateTicketTypeProperties ticketTypesDto = new UpdateTicketTypeProperties()
+                TicketTypeProperties ticketTypesDto = new TicketTypeProperties()
                 {
                     EventId = _eventId,
                     TicketTypeName = comboBoxTicketType.Text,
@@ -135,7 +136,7 @@ namespace EventTicketForms
                     TotalTickets = int.Parse(txtTotalTickets.Text),
                     SalesEndDate = Convert.ToDateTime($"{DateForSalesEnd.Text} {TimeForSalesEnd.Text}"),
                     SalesStartDate = Convert.ToDateTime($"{dateForSalesStart.Text} {TimeForSalesStart.Text}")
-            };
+                };
                 var json = JsonConvert.SerializeObject(ticketTypesDto);
                 var inputdata = new StringContent(json, Encoding.UTF8, "application/json");
                 using (HttpResponseMessage response = await client.PutAsync(_updateTicketTypeUrl + _ticketTypeId, inputdata))
@@ -148,6 +149,17 @@ namespace EventTicketForms
                     else { MessageBox.Show("Internal Server Error"); }
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AddTicketTypeForm addTicketTypeForm = new AddTicketTypeForm(_eventId, _eventName);
+            addTicketTypeForm.FormClosed += addTicketTypeForm_FormClosed;
+            addTicketTypeForm.ShowDialog();
+        }
+        private void addTicketTypeForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ShowTicketTypes();
         }
     }
 }

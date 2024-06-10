@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EventTicketForms.Resources
 {
-    internal class UpdateTicketTypeProperties
+    internal class TicketTypeProperties
     {
         public int EventId { get; set; }
         public required string TicketTypeName { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EventTicketForms.Resources
 {
-    internal class TicketTypesDto
+    internal class TicketTypesReturnDto
     {
         public int Id { get; set; }
         public required string TicketTypeName { get; set; }
