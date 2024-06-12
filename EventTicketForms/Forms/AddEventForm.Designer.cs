@@ -41,6 +41,7 @@
             dateOfEvent = new DateTimePicker();
             TimeOfEvent = new DateTimePicker();
             comboBoxCategories = new ComboBox();
+            btnImage = new Button();
             SuspendLayout();
             // 
             // label7
@@ -96,7 +97,7 @@
             btnAddTicket.FlatStyle = FlatStyle.Popup;
             btnAddTicket.Font = new Font("Bahnschrift", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddTicket.ForeColor = Color.White;
-            btnAddTicket.Location = new Point(149, 615);
+            btnAddTicket.Location = new Point(165, 615);
             btnAddTicket.Name = "btnAddTicket";
             btnAddTicket.Size = new Size(144, 40);
             btnAddTicket.TabIndex = 86;
@@ -174,11 +175,27 @@
             comboBoxCategories.Tag = "";
             comboBoxCategories.SelectedIndexChanged += comboBoxCategories_SelectedIndexChanged;
             // 
+            // btnImage
+            // 
+            btnImage.BackColor = Color.FromArgb(0, 192, 0);
+            btnImage.FlatAppearance.BorderSize = 0;
+            btnImage.FlatStyle = FlatStyle.Popup;
+            btnImage.Font = new Font("Bahnschrift", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnImage.ForeColor = Color.White;
+            btnImage.Location = new Point(280, 83);
+            btnImage.Name = "btnImage";
+            btnImage.Size = new Size(144, 40);
+            btnImage.TabIndex = 99;
+            btnImage.Text = "Upload Image";
+            btnImage.UseVisualStyleBackColor = false;
+            btnImage.Click += btnImage_Click;
+            // 
             // AddEventForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(455, 667);
+            Controls.Add(btnImage);
             Controls.Add(comboBoxCategories);
             Controls.Add(TimeOfEvent);
             Controls.Add(dateOfEvent);
@@ -220,5 +237,6 @@
         private DateTimePicker dateOfEvent;
         private DateTimePicker TimeOfEvent;
         private ComboBox comboBoxCategories;
+        private Button btnImage;
     }
 }

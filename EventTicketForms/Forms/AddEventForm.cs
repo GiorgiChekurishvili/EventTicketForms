@@ -1,4 +1,5 @@
-﻿using EventTicketForms.Resources;
+﻿using EventTicketForms.Forms;
+using EventTicketForms.Resources;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -111,6 +112,12 @@ namespace EventTicketForms
         private void AddEventForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnImage_Click(object sender, EventArgs e)
+        {
+            ImageUploadForm imageUploadForm = new ImageUploadForm();
+            imageUploadForm.ShowDialog();
         }
     }
 }
