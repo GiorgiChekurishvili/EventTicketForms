@@ -50,6 +50,8 @@
             dateForEvent = new DateTimePicker();
             TimeForEvent = new DateTimePicker();
             button2 = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnAddFavorites
@@ -58,7 +60,7 @@
             btnAddFavorites.FlatStyle = FlatStyle.Flat;
             btnAddFavorites.Font = new Font("Bahnschrift", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddFavorites.ForeColor = Color.White;
-            btnAddFavorites.Location = new Point(43, 625);
+            btnAddFavorites.Location = new Point(43, 672);
             btnAddFavorites.Name = "btnAddFavorites";
             btnAddFavorites.Size = new Size(144, 40);
             btnAddFavorites.TabIndex = 58;
@@ -73,7 +75,7 @@
             btnBuyTicket.FlatStyle = FlatStyle.Popup;
             btnBuyTicket.Font = new Font("Bahnschrift", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBuyTicket.ForeColor = Color.White;
-            btnBuyTicket.Location = new Point(274, 625);
+            btnBuyTicket.Location = new Point(581, 672);
             btnBuyTicket.Name = "btnBuyTicket";
             btnBuyTicket.Size = new Size(144, 40);
             btnBuyTicket.TabIndex = 57;
@@ -86,7 +88,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Bauhaus 93", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Indigo;
-            label1.Location = new Point(9, 38);
+            label1.Location = new Point(9, 6);
             label1.Name = "label1";
             label1.Size = new Size(34, 20);
             label1.TabIndex = 56;
@@ -95,7 +97,7 @@
             // txtDescription
             // 
             txtDescription.Font = new Font("Bahnschrift", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtDescription.Location = new Point(172, 413);
+            txtDescription.Location = new Point(306, 460);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.PlaceholderText = "Event Description";
@@ -106,7 +108,7 @@
             // txtCapacity
             // 
             txtCapacity.Font = new Font("Bahnschrift", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtCapacity.Location = new Point(332, 290);
+            txtCapacity.Location = new Point(466, 337);
             txtCapacity.Multiline = true;
             txtCapacity.Name = "txtCapacity";
             txtCapacity.PlaceholderText = "Capacity";
@@ -117,7 +119,7 @@
             // txtEventLocation
             // 
             txtEventLocation.Font = new Font("Bahnschrift", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtEventLocation.Location = new Point(172, 250);
+            txtEventLocation.Location = new Point(306, 297);
             txtEventLocation.Multiline = true;
             txtEventLocation.Name = "txtEventLocation";
             txtEventLocation.PlaceholderText = "Event Location";
@@ -128,7 +130,7 @@
             // txtEventName
             // 
             txtEventName.Font = new Font("Bahnschrift", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtEventName.Location = new Point(172, 210);
+            txtEventName.Location = new Point(306, 257);
             txtEventName.Multiline = true;
             txtEventName.Name = "txtEventName";
             txtEventName.PlaceholderText = "Event Name";
@@ -144,7 +146,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatAppearance.MouseOverBackColor = Color.Red;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(418, 0);
+            button1.Location = new Point(722, 0);
             button1.Name = "button1";
             button1.Size = new Size(39, 32);
             button1.TabIndex = 59;
@@ -155,7 +157,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            label2.Location = new Point(12, 216);
+            label2.Location = new Point(146, 263);
             label2.Name = "label2";
             label2.Size = new Size(119, 24);
             label2.TabIndex = 60;
@@ -165,7 +167,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            label3.Location = new Point(12, 256);
+            label3.Location = new Point(146, 303);
             label3.Name = "label3";
             label3.Size = new Size(143, 24);
             label3.TabIndex = 61;
@@ -175,7 +177,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            label4.Location = new Point(239, 296);
+            label4.Location = new Point(373, 343);
             label4.Name = "label4";
             label4.Size = new Size(87, 24);
             label4.TabIndex = 62;
@@ -185,7 +187,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Bahnschrift", 10F, FontStyle.Bold);
-            label5.Location = new Point(12, 341);
+            label5.Location = new Point(146, 388);
             label5.Name = "label5";
             label5.Size = new Size(154, 21);
             label5.TabIndex = 63;
@@ -195,7 +197,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Bahnschrift", 10.8F, FontStyle.Bold);
-            label6.Location = new Point(12, 413);
+            label6.Location = new Point(146, 460);
             label6.Name = "label6";
             label6.Size = new Size(155, 22);
             label6.TabIndex = 64;
@@ -217,7 +219,7 @@
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.Font = new Font("Bahnschrift", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(274, 615);
+            btnUpdate.Location = new Point(581, 662);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(144, 40);
             btnUpdate.TabIndex = 66;
@@ -232,7 +234,7 @@
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Bahnschrift", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(43, 615);
+            btnDelete.Location = new Point(43, 662);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(144, 40);
             btnDelete.TabIndex = 67;
@@ -247,7 +249,7 @@
             comboBoxCategories.Font = new Font("Bahnschrift", 13F, FontStyle.Bold, GraphicsUnit.Point, 0);
             comboBoxCategories.ForeColor = Color.Black;
             comboBoxCategories.FormattingEnabled = true;
-            comboBoxCategories.Location = new Point(274, 372);
+            comboBoxCategories.Location = new Point(408, 419);
             comboBoxCategories.Name = "comboBoxCategories";
             comboBoxCategories.Size = new Size(169, 35);
             comboBoxCategories.TabIndex = 99;
@@ -257,7 +259,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            label7.Location = new Point(176, 377);
+            label7.Location = new Point(310, 424);
             label7.Name = "label7";
             label7.Size = new Size(92, 24);
             label7.TabIndex = 100;
@@ -267,7 +269,7 @@
             // 
             dateForEvent.Enabled = false;
             dateForEvent.Format = DateTimePickerFormat.Short;
-            dateForEvent.Location = new Point(172, 337);
+            dateForEvent.Location = new Point(306, 384);
             dateForEvent.Name = "dateForEvent";
             dateForEvent.Size = new Size(141, 27);
             dateForEvent.TabIndex = 101;
@@ -276,7 +278,7 @@
             // 
             TimeForEvent.Enabled = false;
             TimeForEvent.Format = DateTimePickerFormat.Time;
-            TimeForEvent.Location = new Point(319, 337);
+            TimeForEvent.Location = new Point(453, 384);
             TimeForEvent.Name = "TimeForEvent";
             TimeForEvent.ShowUpDown = true;
             TimeForEvent.Size = new Size(124, 27);
@@ -289,7 +291,7 @@
             button2.FlatStyle = FlatStyle.Popup;
             button2.Font = new Font("Bahnschrift", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(12, 531);
+            button2.Location = new Point(330, 672);
             button2.Name = "button2";
             button2.Size = new Size(144, 40);
             button2.TabIndex = 103;
@@ -298,11 +300,21 @@
             button2.Visible = false;
             button2.Click += button2_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(49, 38);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(676, 213);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 104;
+            pictureBox1.TabStop = false;
+            // 
             // EventShowFullyForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(455, 667);
+            ClientSize = new Size(760, 724);
+            Controls.Add(pictureBox1);
             Controls.Add(button2);
             Controls.Add(TimeForEvent);
             Controls.Add(dateForEvent);
@@ -328,6 +340,7 @@
             Name = "EventShowFullyForm";
             Text = "RemoveFavoriteForm";
             Load += EventModifier_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -354,5 +367,6 @@
         private DateTimePicker dateForEvent;
         private DateTimePicker TimeForEvent;
         private Button button2;
+        private PictureBox pictureBox1;
     }
 }

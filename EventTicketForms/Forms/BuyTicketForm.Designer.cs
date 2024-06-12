@@ -43,7 +43,9 @@
             txtEndDate = new TextBox();
             lblPrice = new Label();
             lblTotalPrice = new Label();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)numTicketsQuantity).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // comboboxTicketType
@@ -52,7 +54,7 @@
             comboboxTicketType.Font = new Font("Bahnschrift", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             comboboxTicketType.ForeColor = SystemColors.WindowFrame;
             comboboxTicketType.FormattingEnabled = true;
-            comboboxTicketType.Location = new Point(68, 68);
+            comboboxTicketType.Location = new Point(261, 302);
             comboboxTicketType.Name = "comboboxTicketType";
             comboboxTicketType.Size = new Size(286, 30);
             comboboxTicketType.TabIndex = 67;
@@ -61,7 +63,7 @@
             // 
             // numTicketsQuantity
             // 
-            numTicketsQuantity.Location = new Point(134, 269);
+            numTicketsQuantity.Location = new Point(327, 503);
             numTicketsQuantity.Name = "numTicketsQuantity";
             numTicketsQuantity.Size = new Size(150, 27);
             numTicketsQuantity.TabIndex = 68;
@@ -74,7 +76,7 @@
             btnBuyTicket.FlatStyle = FlatStyle.Popup;
             btnBuyTicket.Font = new Font("Bahnschrift", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBuyTicket.ForeColor = Color.White;
-            btnBuyTicket.Location = new Point(134, 389);
+            btnBuyTicket.Location = new Point(327, 623);
             btnBuyTicket.Name = "btnBuyTicket";
             btnBuyTicket.Size = new Size(144, 40);
             btnBuyTicket.TabIndex = 69;
@@ -86,7 +88,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            label4.Location = new Point(134, 349);
+            label4.Location = new Point(327, 583);
             label4.Name = "label4";
             label4.Size = new Size(111, 24);
             label4.TabIndex = 70;
@@ -106,7 +108,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            label1.Location = new Point(26, 272);
+            label1.Location = new Point(219, 506);
             label1.Name = "label1";
             label1.Size = new Size(85, 24);
             label1.TabIndex = 73;
@@ -120,7 +122,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatAppearance.MouseOverBackColor = Color.Red;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(392, 1);
+            button1.Location = new Point(812, 1);
             button1.Name = "button1";
             button1.Size = new Size(39, 32);
             button1.TabIndex = 74;
@@ -131,7 +133,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            label10.Location = new Point(17, 101);
+            label10.Location = new Point(210, 335);
             label10.Name = "label10";
             label10.Size = new Size(126, 24);
             label10.TabIndex = 75;
@@ -141,7 +143,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            label3.Location = new Point(12, 142);
+            label3.Location = new Point(205, 376);
             label3.Name = "label3";
             label3.Size = new Size(158, 24);
             label3.TabIndex = 76;
@@ -151,7 +153,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            label5.Location = new Point(12, 193);
+            label5.Location = new Point(205, 427);
             label5.Name = "label5";
             label5.Size = new Size(146, 24);
             label5.TabIndex = 77;
@@ -160,7 +162,7 @@
             // txtStartDate
             // 
             txtStartDate.Font = new Font("Bahnschrift", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtStartDate.Location = new Point(167, 142);
+            txtStartDate.Location = new Point(360, 376);
             txtStartDate.Multiline = true;
             txtStartDate.Name = "txtStartDate";
             txtStartDate.ReadOnly = true;
@@ -170,7 +172,7 @@
             // txtEndDate
             // 
             txtEndDate.Font = new Font("Bahnschrift", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtEndDate.Location = new Point(164, 187);
+            txtEndDate.Location = new Point(357, 421);
             txtEndDate.Multiline = true;
             txtEndDate.Name = "txtEndDate";
             txtEndDate.ReadOnly = true;
@@ -181,7 +183,7 @@
             // 
             lblPrice.AutoSize = true;
             lblPrice.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            lblPrice.Location = new Point(143, 101);
+            lblPrice.Location = new Point(336, 335);
             lblPrice.Name = "lblPrice";
             lblPrice.Size = new Size(0, 24);
             lblPrice.TabIndex = 80;
@@ -190,16 +192,26 @@
             // 
             lblTotalPrice.AutoSize = true;
             lblTotalPrice.Font = new Font("Bahnschrift", 11.8F, FontStyle.Bold);
-            lblTotalPrice.Location = new Point(245, 349);
+            lblTotalPrice.Location = new Point(438, 583);
             lblTotalPrice.Name = "lblTotalPrice";
             lblTotalPrice.Size = new Size(0, 24);
             lblTotalPrice.TabIndex = 81;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(58, 58);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(753, 238);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 82;
+            pictureBox1.TabStop = false;
             // 
             // BuyTicketForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(429, 450);
+            ClientSize = new Size(849, 681);
+            Controls.Add(pictureBox1);
             Controls.Add(lblTotalPrice);
             Controls.Add(lblPrice);
             Controls.Add(txtEndDate);
@@ -220,6 +232,7 @@
             Text = "BuyTicketForm";
             Load += BuyTicketForm_Load;
             ((System.ComponentModel.ISupportInitialize)numTicketsQuantity).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -240,5 +253,6 @@
         private TextBox txtEndDate;
         private Label lblPrice;
         private Label lblTotalPrice;
+        private PictureBox pictureBox1;
     }
 }
