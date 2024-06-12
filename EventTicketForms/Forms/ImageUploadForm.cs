@@ -89,7 +89,7 @@ namespace EventTicketForms.Forms
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     imagelocation = dialog.FileName;
-                    pictureBox1.ImageLocation = imagelocation; 
+                    pictureBox1.ImageLocation = imagelocation;
                 }
 
                 using (HttpClient client = new HttpClient())
@@ -139,11 +139,16 @@ namespace EventTicketForms.Forms
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", StaticResources.Token);
                 int eventid = Convert.ToInt32(comboBoxEvents.SelectedValue);
-                using (HttpResponseMessage response =  await client.DeleteAsync(_deleteImageUrl + eventid))
+                using (HttpResponseMessage response = await client.DeleteAsync(_deleteImageUrl + eventid))
                 {
                     FillCombobox();
                 }
             }
+        }
+
+        private void ImageUploadForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

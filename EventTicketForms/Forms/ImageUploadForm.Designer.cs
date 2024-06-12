@@ -140,6 +140,7 @@
             Name = "ImageUploadForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ImageUploadForm";
+            Load += ImageUploadForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

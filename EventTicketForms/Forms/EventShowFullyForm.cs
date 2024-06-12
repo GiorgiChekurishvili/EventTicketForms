@@ -1,5 +1,6 @@
 ﻿using EventTicketForms.Resources;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -18,6 +19,7 @@ namespace EventTicketForms
 {
     public partial class EventShowFullyForm : Form
     {
+        private readonly string _getImageByEventId = "http://localhost:5172/api/Images/RetrieveImage/";
         private readonly string _getallcategories = "http://localhost:5172/api/Event/eventcategories";
 
         private readonly string _eventByIdUrl = "http://localhost:5172/api/Event/eventsbyid/";
@@ -33,9 +35,35 @@ namespace EventTicketForms
             _eventId = eventId;
             FillEventInfo();
             FillComboBox();
+            FillImage();
         }
 
+        public async void FillImage()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage response = await client.GetAsync(_getImageByEventId + _eventId))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        using (HttpContent content = response.Content)
+                        {
+                            byte[] imagedata = await content.ReadAsByteArrayAsync();
+                            using (var stream = new System.IO.MemoryStream(imagedata))
+                            {
+                                pictureBox1.Image = System.Drawing.Image.FromStream(stream);
+                            }
 
+                        }
+                    }
+                    else
+                    {
+                        pictureBox1.Image = null;
+                    }
+
+                }
+            }
+        }
         public async void FillEventInfo()
         {
             using (HttpClient client = new HttpClient())

@@ -1,4 +1,5 @@
 ﻿using EventTicketForms.Resources;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -17,6 +18,7 @@ namespace EventTicketForms
 {
     public partial class BuyTicketForm : Form
     {
+        private readonly string _getImageByEventId = "http://localhost:5172/api/Images/RetrieveImage/";
         private readonly string _getTicketTypesUrl = "http://localhost:5172/api/TicketType/seetickettypes/";
         private readonly string _buyTicketUrl = "http://localhost:5172/api/Ticket/buyticket/";
         private int _eventId;
@@ -29,8 +31,35 @@ namespace EventTicketForms
             _eventId = eventId;
             _eventName = eventName;
             ShowTicketTypes();
+            GetImage();
         }
-        private async Task ShowTicketTypes()
+        private async void GetImage()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage response = await client.GetAsync(_getImageByEventId + _eventId))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        using (HttpContent content = response.Content)
+                        {
+                            byte[] imagedata = await content.ReadAsByteArrayAsync();
+                            using (var stream = new System.IO.MemoryStream(imagedata))
+                            {
+                                pictureBox1.Image = System.Drawing.Image.FromStream(stream);
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        pictureBox1.Image = null;
+                    }
+
+                }
+            }
+        } 
+        private async void ShowTicketTypes()
         {
             using (HttpClient client = new HttpClient())
             {
