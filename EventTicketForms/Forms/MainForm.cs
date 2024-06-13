@@ -12,6 +12,7 @@ using EventTicketForms.Services;
 using EventTicketForms.Resources;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using EventTicketForms.Forms;
 
 namespace EventTicketForms
 {
@@ -40,6 +41,7 @@ namespace EventTicketForms
                 {
                     btnFavorites.Visible = true;
                     btnBought.Visible = true;
+                    btnBalance.Visible = true;
                 }
             }
             else
@@ -403,6 +405,8 @@ namespace EventTicketForms
             btnBought.Visible = false;
             btnFavorites.Visible = false;
             btnAddEvent.Visible = false;
+            btnBalance.Visible = false;
+
 
         }
 
@@ -457,6 +461,11 @@ namespace EventTicketForms
         {
             FillDataGridAutomatically();
         }
-        
+
+        private void btnBalance_Click(object sender, EventArgs e)
+        {
+            TransactionsForm transactionsForm = new TransactionsForm();
+            transactionsForm.Show();
+        }
     }
 }

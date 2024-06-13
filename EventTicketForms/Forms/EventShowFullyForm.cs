@@ -38,7 +38,7 @@ namespace EventTicketForms
             FillImage();
         }
 
-        public async void FillImage()
+        private async void FillImage()
         {
             using (HttpClient client = new HttpClient())
             {
@@ -64,7 +64,7 @@ namespace EventTicketForms
                 }
             }
         }
-        public async void FillEventInfo()
+        private async void FillEventInfo()
         {
             using (HttpClient client = new HttpClient())
             {

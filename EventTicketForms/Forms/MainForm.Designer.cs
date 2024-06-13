@@ -33,6 +33,7 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             panel2 = new Panel();
+            btnBalance = new Button();
             btnAddEvent = new Button();
             btnBought = new Button();
             btnFavorites = new Button();
@@ -107,6 +108,7 @@
             // 
             panel2.AutoScroll = true;
             panel2.BackColor = Color.FromArgb(17, 53, 71);
+            panel2.Controls.Add(btnBalance);
             panel2.Controls.Add(btnAddEvent);
             panel2.Controls.Add(btnBought);
             panel2.Controls.Add(btnFavorites);
@@ -120,6 +122,21 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(302, 715);
             panel2.TabIndex = 1;
+            // 
+            // btnBalance
+            // 
+            btnBalance.FlatStyle = FlatStyle.Flat;
+            btnBalance.ForeColor = Color.Gainsboro;
+            btnBalance.Location = new Point(0, 618);
+            btnBalance.Name = "btnBalance";
+            btnBalance.Padding = new Padding(10, 0, 0, 0);
+            btnBalance.Size = new Size(302, 45);
+            btnBalance.TabIndex = 11;
+            btnBalance.Text = "Balance";
+            btnBalance.TextAlign = ContentAlignment.MiddleLeft;
+            btnBalance.UseVisualStyleBackColor = true;
+            btnBalance.Visible = false;
+            btnBalance.Click += btnBalance_Click;
             // 
             // btnAddEvent
             // 
@@ -530,5 +547,6 @@
         private Button btnBought;
         private Button btnLogOut;
         private Button btnAddEvent;
+        private Button btnBalance;
     }
 }
