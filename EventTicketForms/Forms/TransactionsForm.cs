@@ -37,7 +37,7 @@ namespace EventTicketForms.Forms
                         {
                             var json = await content.ReadAsStringAsync();
                             decimal data = JsonConvert.DeserializeObject<decimal>(json);
-                            lblBalance.Text = $"{data} GEL";
+                            lblBalance.Text = $"{data} $";
                         }
                     }
                     else
@@ -66,6 +66,10 @@ namespace EventTicketForms.Forms
                             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                         }
+                    }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        MessageBox.Show("No Transaction Found");
                     }
                     else
                     {

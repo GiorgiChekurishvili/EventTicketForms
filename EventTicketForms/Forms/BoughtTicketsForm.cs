@@ -42,7 +42,7 @@ namespace EventTicketForms
                             var json = await content.ReadAsStringAsync();
                             var data = JsonConvert.DeserializeObject<List<BoughtTicketsDto>>(json);
                             dataGridForBoughtTickets.DataSource = null;
-                            if (data != null)
+                            if ( data!= null)
                             {
                                 dataGridForBoughtTickets.DataSource = data;
                                 dataGridForBoughtTickets.DefaultCellStyle.ForeColor = Color.Black;
@@ -71,6 +71,7 @@ namespace EventTicketForms
                 if (!row.IsNewRow)
                 {
                     int id = int.Parse(row.Cells["Id"].Value.ToString());
+                    string eventId = row.Cells["generatedEventId"].Value.ToString();
                     string eventName = row.Cells["EventName"].Value.ToString();
                     string tickettypename = row.Cells["TicketTypeName"].Value.ToString();
                     int ticketquantity = int.Parse(row.Cells["TicketQuantity"].Value.ToString());
@@ -80,6 +81,7 @@ namespace EventTicketForms
                     _boughtTickets.Add(new BoughtTicketsDto
                     {
                         Id = id,
+                        GeneratedEventId = eventId,
                         EventName = eventName,
                         TicketTypeName = tickettypename,
                         TicketQuantity = ticketquantity,
